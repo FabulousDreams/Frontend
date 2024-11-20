@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import AppRoutes from './routes/routes'
 function App () {
   const [token, setToken] = useState(null)
   const login = () => {
@@ -29,6 +29,7 @@ function App () {
   }, [])
   return (
     <>
+      <AppRoutes />
       <button onClick={login}>Login</button>
     </>
   )
