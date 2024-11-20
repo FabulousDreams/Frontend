@@ -5,9 +5,9 @@ function App () {
   const [token, setToken] = useState(null)
   const login = () => {
     const userData = {
-      email: 'admin@gmail.com',
-      username: 'Mona',
-      password: 'I123456Ma'
+      email: 'admin2@gmail.com',
+      username: 'Mari',
+      password: 'I654321Ma'
     }
     axios
       .post('http://localhost:5005/auth/login', userData)
