@@ -1,65 +1,68 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { useAuthContext } from '../context/authContext'
+
+import axios from 'axios'
 
 const CreateDream = () => {
   const [form, setForm] = useState({
-    title: "",
-    description: "",
-    date: "",
+    title: '',
+    description: '',
+    date: '',
     emotions: [],
     tags: [],
     isPublic: false,
-    imageUrl: "",
-  });
+    imageUrl: ''
+  })
+  const { user } = useAuthContext()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleChange = e => {
+    const { name, value, type, checked } = e.target
 
-    if (type === "checkbox") {
-      setForm((prevForm) => ({
+    if (type === 'checkbox') {
+      setForm(prevForm => ({
         ...prevForm,
-        [name]: checked,
-      }));
-    } else if (name === "emotions" || name === "tags") {
-      setForm((prevForm) => ({
+        [name]: checked
+      }))
+    } else if (name === 'emotions' || name === 'tags') {
+      setForm(prevForm => ({
         ...prevForm,
-        [name]: value.split(",").map((item) => item.trim()),  // Split the input string into an array
-      }));
+        [name]: value.split(',').map(item => item.trim())
+      }))
     } else {
-      setForm((prevForm) => ({
+      setForm(prevForm => ({
         ...prevForm,
-        [name]: value,
-      }));
+        [name]: value
+      }))
     }
-  };
+  }
 
+  const handleSubmit = async e => {
+    e.preventDefault()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-     const dreamData = {
+    const dreamData = {
       ...form,
-      userId: "673dd0ba159bcf268885e8ae"  // Add userId from props (or context)
-    }; 
+      userId: user._id
+    }
 
     try {
-      await axios.post("/api/dreams",dreamData);
-      //navigate("/dashboard");
+      await axios.post('/api/dreams', dreamData)
+      // navigate("/dre");
     } catch (error) {
-      console.error("Error creating a new dream", error);
+      console.error('Error creating a new dream', error)
     }
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Title:
         <input
-          type="text"
-          name="title"
+          type='text'
+          name='title'
           value={form.title}
           onChange={handleChange}
           required
@@ -68,7 +71,7 @@ const CreateDream = () => {
       <label>
         Description:
         <textarea
-          name="description"
+          name='description'
           value={form.description}
           onChange={handleChange}
           required
@@ -77,8 +80,8 @@ const CreateDream = () => {
       <label>
         Date:
         <input
-          type="date"
-          name="date"
+          type='date'
+          name='date'
           value={form.date}
           onChange={handleChange}
           required
@@ -87,26 +90,26 @@ const CreateDream = () => {
       <label>
         Emotions (comma separated):
         <input
-          type="text"
-          name="emotions"
-          value={form.emotions.join(",")}
+          type='text'
+          name='emotions'
+          value={form.emotions.join(',')}
           onChange={handleChange}
         />
       </label>
       <label>
         Tags (comma separated):
         <input
-          type="text"
-          name="tags"
-          value={form.tags.join(",")}
+          type='text'
+          name='tags'
+          value={form.tags.join(',')}
           onChange={handleChange}
         />
       </label>
       <label>
         Public:
         <input
-          type="checkbox"
-          name="isPublic"
+          type='checkbox'
+          name='isPublic'
           checked={form.isPublic}
           onChange={handleChange}
         />
@@ -114,15 +117,15 @@ const CreateDream = () => {
       <label>
         Image URL:
         <input
-          type="text"
-          name="imageUrl"
+          type='text'
+          name='imageUrl'
           value={form.imageUrl}
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Add Dream</button>
+      <button type='submit'>Add Dream</button>
     </form>
-  );
-};
+  )
+}
 
-export default CreateDream;
+export default CreateDream
