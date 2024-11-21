@@ -6,8 +6,8 @@ const Login = () => {
   const { login } = useAuthContext()
   const navigate = useNavigate()
   const [form, setForm] = useState({
-    email: 'admin@gmail.com',
-    password: 'I123456Ma'
+    email: 'admin2@gmail.com',
+    password: 'I654321Ma'
   })
 
   const handleInputChange = e => {
