@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { useAuthContext } from '../context/authContext'
 
 import axios from 'axios'
 
 const CreateDream = () => {
+  const { user } = useAuthContext()
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -15,7 +15,6 @@ const CreateDream = () => {
     isPublic: false,
     imageUrl: ''
   })
-  const { user } = useAuthContext()
 
   const navigate = useNavigate()
 
