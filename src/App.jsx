@@ -30,7 +30,7 @@ function App () {
   return (
     <>
       <AppRoutes />
-      <button onClick={login}>Login</button>
+      {/* <button onClick={login}>Login</button> */}
     </>
   )
 }

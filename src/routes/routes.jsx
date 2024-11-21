@@ -4,12 +4,14 @@ import SignUp from '../pages/signup'
 
 const AppRoutes = () => {
   return (
+
     
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
       </Routes>
     
+
   )
 }
 
