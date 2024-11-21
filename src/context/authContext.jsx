@@ -1,16 +1,12 @@
-import React, { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
-// Create the AuthContext
 const AuthContext = createContext()
 
-// Hook to access the AuthContext
 export const useAuthContext = () => useContext(AuthContext)
 
-// AuthProvider component to wrap around the app
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null) // User state
+  const [user, setUser] = useState(null)
 
-  // Functions to manage auth state
   const login = userData => setUser(userData)
   const logout = () => setUser(null)
 
