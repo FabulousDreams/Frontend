@@ -3,9 +3,9 @@ import axios from 'axios'
 
 const Login = () => {
   const [token, setToken] = useState(null)
-  const [userName, setUserName] = useState('Mona')
-  const [email, setEmail] = useState('admin@gmail.com')
-  const [password, setPassword] = useState('I123456Ma')
+  const [userName, setUserName] = useState('Mari')
+  const [email, setEmail] = useState('admin2@gmail.com')
+  const [password, setPassword] = useState('I654321Ma')
 
   const login = () => {
     const userData = {
@@ -13,11 +13,13 @@ const Login = () => {
       username: userName,
       password: password
     }
-
+      
     axios
       .post('http://localhost:5005/auth/login', userData)
       .then(res => {
+        console.log(res.data)
         const authToken = res.data.authToken
+        const userId = res.data.user._id;
         setToken(authToken)
         localStorage.setItem('authToken', authToken)
       })
