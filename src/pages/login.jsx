@@ -7,23 +7,26 @@ const Login = () => {
   const [email, setEmail] = useState('admin@gmail.com')
   const [password, setPassword] = useState('I123456Ma')
 
-  const login = () => {
+  // Login function to handle API call
+  const login = async () => {
     const userData = {
       email: email,
       username: userName,
       password: password
     }
-
-    axios
-      .post('http://localhost:5005/auth/login', userData)
-      .then(res => {
-        const authToken = res.data.authToken
-        setToken(authToken)
-        localStorage.setItem('authToken', authToken)
-      })
-      .catch(error => {
-        console.error('Login failed:', error)
-      })
+    console.log(token)
+    try {
+      const response = await axios.post(
+        'http://localhost:5005/auth/login',
+        userData
+      )
+      const authToken = response.data.authToken
+      setToken(authToken)
+      localStorage.setItem('authToken', authToken)
+      console.log('Login successful!')
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
   }
 
   useEffect(() => {
