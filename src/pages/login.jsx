@@ -14,7 +14,7 @@ const Login = () => {
       username: userName,
       password: password
     }
-    console.log(token)
+    console.log(token, userData)
     try {
       const response = await axios.post(
         'http://localhost:5005/auth/login',
