@@ -6,10 +6,12 @@ import CreateD from '../pages/createDream'
 import YourDreams from '../pages/displayDreams'
 import Dashboard from '../pages/dashboard'
 import PublicDreams from '../pages/comunitiesDream'
+import LandingPage from '../pages/landingPage'
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+      <Route path='/' element={<LandingPage />} />
+      <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
 
       <Route
