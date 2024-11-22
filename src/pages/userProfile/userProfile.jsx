@@ -3,7 +3,7 @@ import { useUserContext } from '../../context/userContext'
 
 const Profile = () => {
   const { user, fetchUserProfile } = useUserContext()
-
+  console.log(user)
   useEffect(() => {
     fetchUserProfile()
   }, [])

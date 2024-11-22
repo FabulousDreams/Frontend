@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { addComment } from '../services/commentService'
-
 const AddnewComment = ({ dreamId, onCommentAdded }) => {
   const [text, setText] = useState('')
   const [error, setError] = useState(null)
@@ -9,10 +8,11 @@ const AddnewComment = ({ dreamId, onCommentAdded }) => {
     e.preventDefault()
     try {
       const newComment = await addComment(dreamId, text)
-      onCommentAdded(newComment)
+      onCommentAdded(newComment) // Pass the new comment back to the parent
       setText('')
     } catch (err) {
-      setError('Failed to add comment', err)
+      setError('Failed to add comment')
+      console.error('Error adding comment:', err)
     }
   }
 

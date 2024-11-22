@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchComments, deleteComment } from '../services/commentService'
 
-const CommentList = ({ dreamId }) => {
+const CommentList = ({ dreamId, newComment }) => {
   const [comments, setComments] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -18,7 +18,14 @@ const CommentList = ({ dreamId }) => {
     }
 
     loadComments()
-  }, [comments])
+  }, [dreamId])
+
+  // Update the list when a new comment is added
+  useEffect(() => {
+    if (newComment) {
+      setComments(prev => [...prev, newComment])
+    }
+  }, [newComment])
 
   const handleDelete = async commentId => {
     try {

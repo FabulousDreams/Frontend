@@ -6,6 +6,7 @@ import CommentList from '../components/commentList'
 const YourDreams = () => {
   const { myDreams, updateDream, deleteDream } = useDreamContext()
   const [dreams, setDreams] = useState([])
+  const [newComments, setNewComments] = useState({})
   const [editingId, setEditingId] = useState(null)
   const [editedDream, setEditedDream] = useState({})
   const [loading, setLoading] = useState(true)
@@ -13,6 +14,13 @@ const YourDreams = () => {
     setDreams(myDreams)
     setLoading(false)
   }, [myDreams])
+
+  const handleNewComment = (dreamId, newComment) => {
+    setNewComments(prev => ({
+      ...prev,
+      [dreamId]: newComment
+    }))
+  }
   const handleEditClick = dream => {
     setEditingId(dream._id)
     setEditedDream(dream)
@@ -40,7 +48,6 @@ const YourDreams = () => {
       <h1>Your Dreams</h1>
       <ul>
         {dreams.map(dream => {
-          console.log(dream._id)
           return (
             <li key={dream._id}>
               {editingId === dream._id ? (
@@ -70,11 +77,14 @@ const YourDreams = () => {
                 </div>
               )}
 
-              <CommentList dreamId={dream._id} />
+              <CommentList
+                dreamId={dream._id}
+                newComment={newComments[dream._id]}
+              />
               <AddnewComment
                 dreamId={dream._id}
                 onCommentAdded={newComment =>
-                  console.log('Comment added', newComment)
+                  handleNewComment(dream._id, newComment)
                 }
               />
             </li>
