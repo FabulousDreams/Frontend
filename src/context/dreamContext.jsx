@@ -17,9 +17,12 @@ export const DreamProvider = ({ children }) => {
     setError(null) // Reset error state
 
     try {
-      const { data } = await axios.get('http://localhost:5005/dreams/mine', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get(
+        'http://localhost:5005/api/dreams/mine',
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setMyDreams(data)
     } catch (error) {
       setError('Oh no, failed to fetch your dreams!')
@@ -33,9 +36,12 @@ export const DreamProvider = ({ children }) => {
     setError(null)
 
     try {
-      const { data } = await axios.get('http://localhost:5005/dreams/public', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get(
+        'http://localhost:5005/api/dreams/public',
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setPublicDreams(data)
     } catch (error) {
       setError('Oh no, failed to fetch public dreams!')
@@ -50,7 +56,7 @@ export const DreamProvider = ({ children }) => {
 
     try {
       const { data } = await axios.post(
-        'http://localhost:5005/dreams',
+        'http://localhost:5005/api/dreams',
         dreamData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -70,7 +76,7 @@ export const DreamProvider = ({ children }) => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5005/dreams/${dreamId}`,
+        `http://localhost:5005/api/dreams/${dreamId}`,
         updatedData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -91,7 +97,7 @@ export const DreamProvider = ({ children }) => {
     setError(null)
 
     try {
-      await axios.delete(`http://localhost:5005/dreams/${dreamId}`, {
+      await axios.delete(`http://localhost:5005/api/dreams/${dreamId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       setMyDreams(prevDreams =>

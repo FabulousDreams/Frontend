@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDreamContext } from '../context/dreamContext'
-const YourDreams = () => {
-  const { myDreams } = useDreamContext()
-  console.log('myDreams', myDreams)
+const PublicDreams = () => {
+  const { publicDreams } = useDreamContext()
+
   const [dreams, setDreams] = useState([])
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    setDreams(myDreams)
+    setDreams(publicDreams)
     setLoading(false)
-  }, [myDreams])
+  }, [publicDreams])
 
   if (loading) {
     return <p>Loading dreams...</p>
@@ -21,7 +21,7 @@ const YourDreams = () => {
 
   return (
     <div>
-      <h1>Your Dreams</h1>
+      <h1>public Dreams</h1>
       <ul>
         {dreams.map(dream => {
           console.log(dream)
@@ -41,4 +41,4 @@ const YourDreams = () => {
   )
 }
 
-export default YourDreams
+export default PublicDreams
