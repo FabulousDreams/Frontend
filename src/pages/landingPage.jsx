@@ -1,10 +1,8 @@
 // SimpleLandingPage.js
 
-import './landingPage.css'
-
 const SimpleLandingPage = () => {
   return (
-    <div className='landing-container'>
+    <div id='landing-container'>
       <header className='landing-header'>
         <h1>Welcome to The Dream Journal App</h1>
         <p>

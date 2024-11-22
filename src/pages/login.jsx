@@ -23,31 +23,33 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          type='email'
-          id='email'
-          name='email'
-          required
-          value={form.email}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          required
-          value={form.password}
-          onChange={handleInputChange}
-        />
-      </div>
-      <button type='submit'>Submit</button>
-    </form>
+    <div id='login-form'>
+      <form onSubmit={handleSubmit}>
+        <div className='landing-header'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            required
+            value={form.email}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            required
+            value={form.password}
+            onChange={handleInputChange}
+          />
+        </div>
+        <button type='submit'>Submit</button>
+      </form>
+    </div>
   )
 }
 
