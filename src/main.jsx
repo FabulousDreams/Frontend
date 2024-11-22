@@ -3,14 +3,16 @@ import { createRoot } from 'react-dom/client'
 import './App.css'
 import App from './App.jsx'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { AuthProvider } from './context/authContext.jsx' // Import AuthProvider
-// import { DreamProvider } from './context/dreamContext.jsx' // Import DreamProvider
+import { AuthProvider } from './context/authContext.jsx'
+import { DreamProvider } from './context/dreamContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
       <AuthProvider>
-        <App />
+        <DreamProvider>
+          <App />
+        </DreamProvider>
       </AuthProvider>
     </Router>
   </StrictMode>

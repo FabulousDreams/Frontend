@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Login from '../pages/login'
+import Login from '../pages/Login'
 import SignUp from '../pages/signup'
-import Dreams from '../pages/displayDreams'
-import Dashboard from '../pages/dashboard'
-import DreamCreation from '../pages/createDream'
 import ProtectedRoute from './protectRoutes'
-import SimpleLandingPage from '../pages/landingPage'
+import CreateD from '../pages/createDream'
+import YourDreams from '../pages/displayDreams'
+import Dashboard from '../pages/dashboard'
+import PublicDreams from '../pages/comunitiesDream'
+import LandingPage from '../pages/landingPage'
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<SimpleLandingPage />} />
+      <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
+
       <Route
         path='/dashboard'
         element={
@@ -21,18 +23,27 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path='/dream'
+        path='/add-dream'
         element={
           <ProtectedRoute>
-            <DreamCreation />
+            <CreateD />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path='/mine-dreams'
+        element={
+          <ProtectedRoute>
+            <YourDreams />
           </ProtectedRoute>
         }
       />
       <Route
-        path='/all-dream'
+        path='/public-dreams'
         element={
           <ProtectedRoute>
-            <Dreams />
+            <PublicDreams />
           </ProtectedRoute>
         }
       />
