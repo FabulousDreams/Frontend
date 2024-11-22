@@ -7,13 +7,21 @@ import YourDreams from '../pages/displayDreams'
 import Dashboard from '../pages/dashboard'
 import PublicDreams from '../pages/comunitiesDream'
 import LandingPage from '../pages/landingPage'
+import MyProfile from '../pages/userProfile/userProfile'
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
-
+      <Route
+        path='/profile'
+        element={
+          <ProtectedRoute>
+            <MyProfile />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path='/dashboard'
         element={
