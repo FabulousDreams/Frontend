@@ -1,5 +1,4 @@
-import React from 'react'
-
+import '../app.css'
 import { NavbarData } from './NavbarData'
 import { useAuthContext } from '../context/authContext'
 
