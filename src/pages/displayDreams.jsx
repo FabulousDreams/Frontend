@@ -1,22 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { useDreamContext } from '../context/dreamContext'
+import AddnewComment from '../components/createComment'
+import CommentList from '../components/commentList'
+
 const YourDreams = () => {
-  const { myDreams } = useDreamContext()
-  console.log('myDreams', myDreams)
+  const { myDreams, updateDream, deleteDream } = useDreamContext()
   const [dreams, setDreams] = useState([])
+  const [editingId, setEditingId] = useState(null)
+  const [editedDream, setEditedDream] = useState({})
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setDreams(myDreams)
     setLoading(false)
   }, [myDreams])
-
-  if (loading) {
-    return <p>Loading dreams...</p>
+  const handleEditClick = dream => {
+    setEditingId(dream._id)
+    setEditedDream(dream)
   }
 
-  if (dreams.length === 0) {
-    return <p>No dreams found, start adding some!</p>
+  const handleSaveClick = async () => {
+    await updateDream(editingId, editedDream)
+    setEditingId(null)
+  }
+
+  const handleDelete = async dreamId => {
+    await deleteDream(dreamId)
+  }
+
+  const handleInputChange = e => {
+    const { name, value } = e.target
+    setEditedDream(prev => ({ ...prev, [name]: value }))
+  }
+  if (loading) {
+    return <p>Loading dreams...</p>
   }
 
   return (
@@ -24,15 +40,43 @@ const YourDreams = () => {
       <h1>Your Dreams</h1>
       <ul>
         {dreams.map(dream => {
-          console.log(dream)
+          console.log(dream._id)
           return (
             <li key={dream._id}>
-              <h3>{dream.title}</h3>
-              <p>{dream.description}</p>
-              {dream.emotions && dream.emotions.length > 0 && (
-                <p>Emotions: {dream.emotions.join(', ')}</p>
+              {editingId === dream._id ? (
+                <div>
+                  <input
+                    type='text'
+                    name='title'
+                    value={editedDream.title || ''}
+                    onChange={handleInputChange}
+                  />
+                  <textarea
+                    name='description'
+                    value={editedDream.description || ''}
+                    onChange={handleInputChange}
+                  />
+                  <button onClick={handleSaveClick}>Save</button>
+                  <button onClick={() => setEditingId(null)}>Cancel</button>
+                </div>
+              ) : (
+                <div>
+                  <h3>{dream.title}</h3>
+                  <p>{dream.description}</p>
+                  <button onClick={() => handleEditClick(dream)}>Edit</button>
+                  <button onClick={() => handleDelete(dream._id)}>
+                    Delete
+                  </button>
+                </div>
               )}
-              <p>{dream.isPublic ? 'Public' : 'Private'}</p>
+
+              <CommentList dreamId={dream._id} />
+              <AddnewComment
+                dreamId={dream._id}
+                onCommentAdded={newComment =>
+                  console.log('Comment added', newComment)
+                }
+              />
             </li>
           )
         })}
