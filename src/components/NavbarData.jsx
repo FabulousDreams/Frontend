@@ -10,6 +10,12 @@ export const NavbarData = [
     protected: true
   },
   {
+    title: 'Your Dreams',
+    icon: <AddBoxIcon />,
+    link: '/all-dream',
+    protected: true
+  },
+  {
     title: 'New Dream',
     icon: <AddBoxIcon />,
     link: '/dream',
@@ -24,7 +30,7 @@ export const NavbarData = [
   {
     title: 'Login',
     icon: null,
-    link: '/',
+    link: '/login',
     protected: false
   },
   {
