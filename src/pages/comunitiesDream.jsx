@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
+import AddnewComment from '../components/createComment'
+import CommentList from '../components/commentList'
 import { useDreamContext } from '../context/dreamContext'
 const PublicDreams = () => {
   const { publicDreams } = useDreamContext()
@@ -33,6 +34,13 @@ const PublicDreams = () => {
                 <p>Emotions: {dream.emotions.join(', ')}</p>
               )}
               <p>{dream.isPublic ? 'Public' : 'Private'}</p>
+              <CommentList dreamId={dream._id} />
+              <AddnewComment
+                dreamId={dream._id}
+                onCommentAdded={newComment =>
+                  console.log('Comment added', newComment)
+                }
+              />
             </li>
           )
         })}
