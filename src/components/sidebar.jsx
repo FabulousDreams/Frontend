@@ -1,5 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import NightsStayIcon from '@mui/icons-material/NightsStay'
+import PublicIcon from '@mui/icons-material/Public'
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import AutoGraphIcon from '@mui/icons-material/AutoGraph'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
@@ -17,39 +23,38 @@ const Sidebar = () => {
         <ul className='sidebar-list'>
           <li className='menu-item'>
             <Link to='/dashboard'>
-              <span>Dashboard</span>
+              <NightsStayIcon /> <span>Dashboard</span>
             </Link>
           </li>
 
           <li className='menu-item'>
             <Link to='/mine-dreams'>
-              <span>My All Dreams</span>
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/public-dreams'>
-              <span>Public Dreams</span>
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/add-dream'>
-              <span>New Dream</span>
-            </Link>
-          </li>
-          <li className='menu-item'>
-            <Link to='/public-dreams'>
-              <span>Publics</span>
+              <AutoAwesomeIcon /> <span>My Dreams</span>
             </Link>
           </li>
 
           <li className='menu-item'>
             <Link to='/public-dreams'>
-              <span>Analytics</span>
+              <AutoGraphIcon /> <span>Analytics</span>
             </Link>
           </li>
+
+          <li className='menu-item'>
+            <Link to='/add-dream'>
+              <AddBoxIcon /> <span>Add New Dream</span>
+            </Link>
+          </li>
+
           <li className='menu-item responsive'>
             <Link to='/profile'>
-              <span>Profile</span>
+              <AccountCircleIcon />
+              <span>My Profile</span>
+            </Link>
+          </li>
+
+          <li className='menu-item'>
+            <Link to='/public-dreams'>
+              <PublicIcon /> <span>Public Dreams</span>
             </Link>
           </li>
         </ul>

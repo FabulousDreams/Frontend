@@ -56,74 +56,75 @@ const CreateDream = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Title:
-        <input
-          type='text'
-          name='title'
-          value={form.title}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          name='description'
-          value={form.description}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Date:
-        <input
-          type='date'
-          name='date'
-          value={form.date}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Emotions (comma separated):
-        <input
-          type='text'
-          name='emotions'
-          value={form.emotions.join(',')}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Tags (comma separated):
-        <input
-          type='text'
-          name='tags'
-          value={form.tags.join(',')}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Public:
-        <input
-          type='checkbox'
-          name='isPublic'
-          checked={form.isPublic}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Image URL:
-        <input
-          type='text'
-          name='imageUrl'
-          value={form.imageUrl}
-          onChange={handleChange}
-        />
-      </label>
-      <button type='submit'>Add Dream</button>
-    </form>
+    <div id='create-dream'>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title:</label>
+          <input
+            type='text'
+            name='title'
+            value={form.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Description: </label>
+          <textarea
+            name='description'
+            value={form.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Date: </label>
+          <input
+            type='date'
+            name='date'
+            value={form.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Emotions (comma separated): </label>
+          <input
+            type='text'
+            name='emotions'
+            value={form.emotions.join(',')}
+            onChange={handleChange}
+          />
+
+          <label>Tags (comma separated): </label>
+          <input
+            type='text'
+            name='tags'
+            value={form.tags.join(',')}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Public:</label>
+          <input
+            type='checkbox'
+            name='isPublic'
+            checked={form.isPublic}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label>Image URL: </label>
+          <input
+            type='text'
+            name='imageUrl'
+            value={form.imageUrl}
+            onChange={handleChange}
+          />
+        </div>
+        <button type='submit'>Add Dream</button>
+      </form>
+    </div>
   )
 }
 

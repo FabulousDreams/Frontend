@@ -8,7 +8,7 @@ export const useAuthContext = () => useContext(AuthContext)
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
-
+  const [feedBackLogin, setFeedBackLogin] = useState('')
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -35,6 +35,39 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
     } catch (error) {
       console.error('Login failed:', error)
+      setFeedBackLogin('user not found.')
+    }
+  }
+  const signUp = async userData => {
+    console.log('userData', userData)
+    try {
+      const res = await axios.post(
+        'http://localhost:5005/auth/signup',
+        userData
+      )
+      console.log('res', res)
+
+      const authToken = res.data.authToken
+      const userDataResponse = res.data.user
+
+      setToken(authToken)
+      setUser(userDataResponse)
+
+      localStorage.setItem('authToken', authToken)
+      localStorage.setItem('user', JSON.stringify(userDataResponse))
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
+      return {
+        success: true,
+        message: 'Sign-up successful! You can now log in.'
+      }
+    } catch (error) {
+      console.error('Sign-up failed:', error)
+      if (error.response && error.response.data.message) {
+        return { success: false, message: error.response.data.message }
+      } else {
+        return { success: false, message: 'An unexpected error occurred.' }
+      }
     }
   }
 
@@ -47,7 +80,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, token, login, logout, feedBackLogin, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   )
