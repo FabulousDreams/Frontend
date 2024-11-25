@@ -9,6 +9,7 @@ import Dashboard from '../pages/dashboard'
 import PublicDreams from '../pages/comunitiesDream'
 import LandingPage from '../pages/landingPage'
 import MyProfile from '../pages/userProfile/userProfile'
+import DreamAnalytics from '../pages/dreamAnalytics'
 
 const AppRoutes = () => {
   return (
@@ -44,7 +45,7 @@ const AppRoutes = () => {
         />
 
         <Route
-          path='/mine-dreams'
+          path='/my-dreams'
           element={
             <ProtectedRoute>
               <YourDreams />
@@ -59,6 +60,15 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/analytics" element={
+          <ProtectedRoute>
+            <DreamAnalytics />
+            </ProtectedRoute>
+        }
+        />
+
+        
+
       </Routes>
     </div>
   )

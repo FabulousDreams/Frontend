@@ -28,7 +28,7 @@ const Sidebar = () => {
           </li>
 
           <li className='menu-item'>
-            <Link to='/mine-dreams'>
+            <Link to='/my-dreams'>
               <AutoAwesomeIcon /> <span>My Dreams</span>
             </Link>
           </li>
