@@ -3,21 +3,15 @@ import { useState, useEffect } from 'react'
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
-
-  //   useEffect(() => {
-  //     const publicRoutes = ['/', '/login', '/signup']
-  //     setAuth(!publicRoutes.includes(location.pathname))
-  //   }, [location.pathname, setAuth])
-
-  // Toggle sidebar visibility for mobile
-  //   const toggleSidebar = () => setOpenSidebar(!openSidebar)
+  // 1-function to handle sidebar at mobile size
+  // 2.having logo or image for clicking on it
 
   return (
     <>
       <div className='re-nav'>
-        <button className='sidebar-toggle-btn'>
-          {/* <img src={wlogo} className='logo-image' alt='Logo' /> */}
-        </button>
+        {/* <button className='sidebar-toggle-btn'> */}
+        {/* <img src={wlogo} className='logo-image' alt='Logo' /> */}
+        {/* </button> */}
       </div>
       <div className='sidebar  open closed'>
         <ul className='sidebar-list'>
