@@ -1,0 +1,16 @@
+.sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  max-width: 250px;
+  height: calc(100vh - 60px);
+  background-color: #bacdda;
+  overflow-y: auto;
+  z-index: 10;
+  padding: 8px 5px;
+  font-family: Arial, sans-serif;
+  margin-right: 250px;
+  //   color: $primary-vibrant-red-trans;
+  transition: transform 0.3s ease;
+}

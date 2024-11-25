@@ -1,0 +1,17 @@
+#layout {
+  display: flex;
+  flex-direction: column;
+  .main-area {
+    display: flex;
+    .main-content {
+      margin-top: 70px;
+      margin-left: 275px;
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
+
+  .no-sidebar {
+    margin-left: 0;
+  }
+}

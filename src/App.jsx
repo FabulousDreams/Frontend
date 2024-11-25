@@ -3,10 +3,11 @@ import AppRoutes from './routes/routes'
 
 function App () {
   return (
-    <>
+    <div id='layout'>
       <Navbar />
+
       <AppRoutes />
-    </>
+    </div>
   )
 }
 
