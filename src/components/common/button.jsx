@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 
-export const DreamButton = ({
+const DreamButton = ({
   size,
   className,
   enable,
@@ -64,3 +64,4 @@ export const DreamButton = ({
     </div>
   )
 }
+export default DreamButton

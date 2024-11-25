@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import tent from '../assets/images/tent.jpg'
 import SignUp from '../pages/signup'
 import InputField from '../components/common/inputField'
+import DreamButton from '../components/common/button'
 const Login = () => {
   const { login, feedBackLogin } = useAuthContext()
   const navigate = useNavigate()
@@ -59,7 +60,6 @@ const Login = () => {
               </div>
               <button type='submit'>Submit</button>
               <DreamButton
-                onClick={onAdd}
                 label='Add'
                 enable={true}
                 size='small'
