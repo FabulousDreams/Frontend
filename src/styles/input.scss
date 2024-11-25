@@ -1,0 +1,121 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputContainer label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.inputContainer .inputField {
+  display: flex;
+  height: 45px;
+  padding: 1px 0;
+  padding-left: 14px;
+  margin: 8px 0;
+  align-items: center;
+
+  border-radius: 7px;
+  //   transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.inputContainer .inputField.largeInput {
+  width: 420px;
+}
+
+.inputContainer .inputField.mediumInput {
+  width: 220px;
+}
+
+.inputContainer .inputField.smallInput {
+  width: 120px;
+}
+
+.inputContainer textarea,
+.inputContainer input {
+  border: none;
+  min-height: 38px;
+  margin-left: 11px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-sizing: border-box;
+
+  color: #333;
+  background-color: #f3faff;
+  transition: border-color 0.3s ease;
+
+  background-color: #f3faff;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #007b83;
+  }
+}
+
+.inputContainer textarea:focus,
+.inputContainer input:focus {
+  // border-color: #ffcc00;
+  outline: none;
+}
+
+.inputContainer input::placeholder {
+  color: #5e4a6d;
+}
+
+.inputContainer .passwordToggleIcon {
+  cursor: pointer;
+}
+
+.inputContainer .passwordToggleIcon.hidden {
+  display: none;
+}
+
+.inputContainer .passwordToggleIcon.visible {
+  display: inline-block;
+}
+
+@media (max-width: 490px) {
+  .inputContainer {
+    gap: 2px;
+  }
+
+  .inputContainer label {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .inputContainer .inputField {
+    height: 40px;
+    padding-left: 10px;
+    margin: 6px 0;
+    width: 100%;
+  }
+
+  .inputContainer .inputField.xlargeInput,
+  .inputContainer .inputField.largeInput,
+  .inputContainer .inputField.mediumInput,
+  .inputContainer .inputField.smallInput {
+    width: 100%;
+  }
+
+  .inputContainer input,
+  .inputContainer textarea {
+    min-height: 36px;
+    padding: 2px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+  }
+}

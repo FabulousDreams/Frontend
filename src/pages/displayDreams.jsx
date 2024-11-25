@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
+
 import { useDreamContext } from '../context/dreamContext'
 import AddnewComment from '../components/createComment'
 import CommentList from '../components/commentList'
+import Card from '../components/CardComponent'
 
 const YourDreams = () => {
   const { myDreams, updateDream, deleteDream } = useDreamContext()
   const [dreams, setDreams] = useState([])
-  const [newComments, setNewComments] = useState({})
+
   const [editingId, setEditingId] = useState(null)
   const [editedDream, setEditedDream] = useState({})
   const [loading, setLoading] = useState(true)
@@ -15,12 +17,6 @@ const YourDreams = () => {
     setLoading(false)
   }, [myDreams])
 
-  const handleNewComment = (dreamId, newComment) => {
-    setNewComments(prev => ({
-      ...prev,
-      [dreamId]: newComment
-    }))
-  }
   const handleEditClick = dream => {
     setEditingId(dream._id)
     setEditedDream(dream)
@@ -67,17 +63,20 @@ const YourDreams = () => {
                   <button onClick={() => setEditingId(null)}>Cancel</button>
                 </div>
               ) : (
-                <div>
-                  <h3>{dream.title}</h3>
-                  <p>{dream.description}</p>
-                  <button onClick={() => handleEditClick(dream)}>Edit</button>
-                  <button onClick={() => handleDelete(dream._id)}>
-                    Delete
-                  </button>
-                </div>
+                <Card
+                  id={dream._id}
+                  title={dream.title}
+                  subtitle={dream.subtitle}
+                  description={dream.description}
+                  emotions={dream.emotions}
+                  tags={dream.tags}
+                  imageUrl={dream.imageUrl}
+                  onEditItem={() => handleEditClick(dream)}
+                  onDeleteItem={handleDelete}
+                />
               )}
 
-              <CommentList
+              {/* <CommentList
                 dreamId={dream._id}
                 newComment={newComments[dream._id]}
               />
@@ -86,7 +85,7 @@ const YourDreams = () => {
                 onCommentAdded={newComment =>
                   handleNewComment(dream._id, newComment)
                 }
-              />
+              /> */}
             </li>
           )
         })}

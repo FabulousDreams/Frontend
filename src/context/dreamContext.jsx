@@ -10,6 +10,7 @@ export const DreamProvider = ({ children }) => {
   const { token } = useAuthContext()
   const [myDreams, setMyDreams] = useState([])
   const [publicDreams, setPublicDreams] = useState([])
+  const [specificDream, setSpecificDream] = useState(null)
   const [error, setError] = useState(null) // Handle errors
 
   // fetch user dreams
@@ -48,7 +49,28 @@ export const DreamProvider = ({ children }) => {
       console.error('Error fetching dreams:', err)
     }
   }
-
+  const fetchDreamById = async dreamId => {
+    setError(null)
+    setSpecificDream(null) // Reset specific dream state
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5005/api/dreams/${dreamId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
+      setSpecificDream(data)
+    } catch (err) {
+      if (err.response?.status === 404) {
+        setError('Dream not found.')
+      } else if (err.response?.status === 403) {
+        setError('Access denied.')
+      } else {
+        setError('Failed to fetch the dream.')
+      }
+      console.error('Error fetching dream:', err)
+    }
+  }
   // create new dream
 
   const createDream = async dreamData => {
@@ -121,8 +143,10 @@ export const DreamProvider = ({ children }) => {
       value={{
         myDreams,
         publicDreams,
+        specificDream,
         fetchMyDreams,
         fetchPublicDreams,
+        fetchDreamById,
         createDream,
         updateDream,
         deleteDream,
