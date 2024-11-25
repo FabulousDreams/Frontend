@@ -8,7 +8,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className='re-nav'>
+      <div className='responsive-nav'>
         {/* <button className='sidebar-toggle-btn'> */}
         {/* <img src={wlogo} className='logo-image' alt='Logo' /> */}
         {/* </button> */}
@@ -16,43 +16,40 @@ const Sidebar = () => {
       <div className='sidebar  open closed'>
         <ul className='sidebar-list'>
           <li className='menu-item'>
-            <Link to='/'>
-              <span>Home</span>
+            <Link to='/dashboard'>
+              <span>Dashboard</span>
             </Link>
           </li>
 
-          <h3>Recipes</h3>
           <li className='menu-item'>
-            <span>Add A Recipe</span>
-          </li>
-          <li className='menu-item'>
-            <Link to='/my-recipes'>
-              <span>My Recipes</span>
+            <Link to='/mine-dreams'>
+              <span>My All Dreams</span>
             </Link>
           </li>
           <li className='menu-item'>
-            <span>Lucky Choice!</span>
-          </li>
-          <li className='menu-item'>
-            <Link to='/tags'>
-              <span>Tags</span>
+            <Link to='/public-dreams'>
+              <span>Public Dreams</span>
             </Link>
           </li>
           <li className='menu-item'>
-            <Link to='/favourites'>
-              <span>Favourites</span>
+            <Link to='/add-dream'>
+              <span>New Dream</span>
+            </Link>
+          </li>
+          <li className='menu-item'>
+            <Link to='/public-dreams'>
+              <span>Publics</span>
             </Link>
           </li>
 
-          <h3>Plan & Shop</h3>
           <li className='menu-item'>
-            <Link to='/meal-planner'>
-              <span>Meal Planner</span>
+            <Link to='/public-dreams'>
+              <span>Analytics</span>
             </Link>
           </li>
           <li className='menu-item responsive'>
-            <Link to='/shopping-lists'>
-              <span>Shopping Lists</span>
+            <Link to='/profile'>
+              <span>Profile</span>
             </Link>
           </li>
         </ul>

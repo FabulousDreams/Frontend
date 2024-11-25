@@ -5,7 +5,8 @@
   width: 100%;
   max-width: 250px;
   height: calc(100vh - 60px);
-  background-color: #bacdda;
+  background-color: #f7f7f7;
+
   overflow-y: auto;
   z-index: 10;
   padding: 8px 5px;
@@ -14,7 +15,22 @@
   //   color: $primary-vibrant-red-trans;
   transition: transform 0.3s ease;
 }
-
+.menu-item {
+  padding: 8px 10px;
+  list-style-type: none;
+  margin: 18px 10px;
+  a {
+    color: #0e273c;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: #bda5f1;
+    border-radius: 5px;
+    a {
+      color: #f7f7f7;
+    }
+  }
+}
 @media (max-width: 490px) {
   .sidebar {
     top: 57px;
@@ -48,7 +64,7 @@
     cursor: pointer;
   }
 
-  .re-nav {
+  .responsive-nav {
     width: 100%;
     height: 60px;
     background-color: #8faadf;
