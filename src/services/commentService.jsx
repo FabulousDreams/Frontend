@@ -8,7 +8,6 @@ export const fetchComments = async dreamId => {
 }
 
 export const addComment = async (dreamId, text) => {
-  console.log(dreamId)
   const response = await axios.post(API_URL, { dreamId, text })
   return response.data
 }

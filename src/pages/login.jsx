@@ -13,7 +13,6 @@ const Login = () => {
   })
   const [active, setActive] = useState(true)
   const Signup = () => {
-    console.log(active)
     setActive(!active)
   }
   const handleInputChange = e => {

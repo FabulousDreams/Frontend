@@ -25,7 +25,6 @@ const PublicDreams = () => {
       <h1>public Dreams</h1>
       <ul>
         {dreams.map(dream => {
-          console.log(dream)
           return (
             <li key={dream._id}>
               <h3>{dream.title}</h3>

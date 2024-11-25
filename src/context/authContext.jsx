@@ -39,13 +39,11 @@ export const AuthProvider = ({ children }) => {
     }
   }
   const signUp = async userData => {
-    console.log('userData', userData)
     try {
       const res = await axios.post(
         'http://localhost:5005/auth/signup',
         userData
       )
-      console.log('res', res)
 
       const authToken = res.data.authToken
       const userDataResponse = res.data.user

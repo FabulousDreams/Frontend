@@ -23,7 +23,6 @@ export const UserProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` }
       })
       setUser(data)
-      console.log(data)
     } catch (err) {
       setError('Oh no, failed to fetch your data!')
       console.error('Error fetching data:', err)
