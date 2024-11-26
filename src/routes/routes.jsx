@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useAuthContext } from '../context/authContext'
+
 import Login from '../pages/Login'
 import SignUp from '../pages/signup'
 import ProtectedRoute from './protectRoutes'
 import CreateD from '../pages/createDream'
-import YourDreams from '../pages/displayDreams'
+import YourDreams from '../pages/privateDreams'
 import Dashboard from '../pages/dashboard'
 import PublicDreams from '../pages/comunitiesDream'
 import LandingPage from '../pages/landingPage'

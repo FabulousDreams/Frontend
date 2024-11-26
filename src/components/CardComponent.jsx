@@ -28,11 +28,15 @@ const Card = ({
   return (
     <Link to={`/dream/${id}`}>
       <div className='card'>
+        {/* Display image */}
+        {imageUrl && (
+          <div className='card-image-container'>
+            <img src={imageUrl} alt='Dream Image' className='card-image' />
+          </div>
+        )}
+
         <div className='card-content'>
           <h3 className='card-title'>{title}</h3>
-          {subtitle && <p className='card-subtitle'>{subtitle}</p>}
-          {description && <p className='card-description'>{description}</p>}
-
           {/* Display emotions */}
           {emotions && emotions.length > 0 && (
             <p className='card-emotions'>Emotions: {emotions.join(', ')}</p>
@@ -42,13 +46,8 @@ const Card = ({
           {tags && tags.length > 0 && (
             <p className='card-tags'>Tags: {tags.join(', ')}</p>
           )}
-
-          {/* Display image */}
-          {imageUrl && (
-            <div className='card-image-container'>
-              <img src={imageUrl} alt='Dream Image' className='card-image' />
-            </div>
-          )}
+          {subtitle && <p className='card-subtitle'>{subtitle}</p>}
+          {description && <p className='card-description'>{description}</p>}
 
           <div className='card-actions'>
             {/* Edit Button */}

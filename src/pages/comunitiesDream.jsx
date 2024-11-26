@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import AddnewComment from '../components/createComment'
-import CommentList from '../components/commentList'
+
+import Card from '../components/CardComponent'
 import { useDreamContext } from '../context/dreamContext'
 const PublicDreams = () => {
+  const { myDreams, updateDream, deleteDream, tags, emotions } =
+    useDreamContext()
   const { publicDreams } = useDreamContext()
 
   const [dreams, setDreams] = useState([])
@@ -11,7 +13,19 @@ const PublicDreams = () => {
     setDreams(publicDreams)
     setLoading(false)
   }, [publicDreams])
+  const getEmotionNames = emotionIds => {
+    return emotionIds.map(id => {
+      const emotion = emotions.find(emotion => emotion._id === id)
+      return emotion ? emotion.name : 'Unknown Emotion'
+    })
+  }
 
+  const getTagNames = tagIds => {
+    return tagIds.map(id => {
+      const tag = tags.find(tag => tag._id === id)
+      return tag ? tag.name : 'Unknown Tag'
+    })
+  }
   if (loading) {
     return <p>Loading dreams...</p>
   }
@@ -25,22 +39,21 @@ const PublicDreams = () => {
       <h1>public Dreams</h1>
       <ul>
         {dreams.map(dream => {
+          const emotionNames = getEmotionNames(dream.emotions || [])
+          const tagNames = getTagNames(dream.tags || [])
+
           return (
-            <li key={dream._id}>
-              <h3>{dream.title}</h3>
-              <p>{dream.description}</p>
-              {dream.emotions && dream.emotions.length > 0 && (
-                <p>Emotions: {dream.emotions.join(', ')}</p>
-              )}
-              <p>{dream.isPublic ? 'Public' : 'Private'}</p>
-              <CommentList dreamId={dream._id} />
-              <AddnewComment
-                dreamId={dream._id}
-                onCommentAdded={newComment =>
-                  console.log('Comment added', newComment)
-                }
+            <div key={dream._id}>
+              <Card
+                id={dream._id}
+                title={dream.title}
+                subtitle={dream.subtitle}
+                description={dream.description}
+                emotions={emotionNames}
+                tags={tagNames}
+                imageUrl={dream.imageUrl}
               />
-            </li>
+            </div>
           )
         })}
       </ul>
