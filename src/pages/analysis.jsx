@@ -18,6 +18,8 @@ import {
   Legend
 } from 'chart.js'
 import { Bar, Line, Pie } from 'react-chartjs-2'
+import { Colors } from 'chart.js'
+
 
 ChartJS.register(
   CategoryScale,
@@ -28,7 +30,8 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Colors
 )
 
 const Analysis = () => {
@@ -37,10 +40,11 @@ const Analysis = () => {
   const [emotionData, setEmotionData] = useState([])
   const [tagData, setTagData] = useState([])
   const [trendData, setTrendData] = useState([])
+  const [filteredTrendData, setFilteredTrendData] = useState([]) // New state to store filtered trend data
   const [error, setError] = useState(null)
   const [startDate, setStartDate] = useState('')
-
   const [endDate, setEndDate] = useState('')
+
   const getNameByIdOrDirectName = (id, list) => {
     if (typeof id === 'string' && list.find(el => el.name === id)) {
       return id
@@ -49,6 +53,34 @@ const Analysis = () => {
     const item = list.find(el => el._id === id)
     return item ? item.name : id // Return name if found, otherwise fallback to id
   }
+
+  const aggregateTrendData = (data) => {
+    // Create a map to store aggregated counts by month and year
+    const aggregated = {}
+
+    data.forEach(item => {
+      const { year, month } = item._id // Destructure year and month
+      const key = `${year}-${month}` // Create a key like '2024-11'
+
+      // If this key exists, increment the count, otherwise set the count
+      if (aggregated[key]) {
+        aggregated[key] += item.count
+      } else {
+        aggregated[key] = item.count
+      }
+    })
+
+    // Convert the aggregated object into an array suitable for charting
+    return Object.keys(aggregated).map(key => {
+      const [year, month] = key.split('-')
+      return {
+        year,
+        month,
+        count: aggregated[key]
+      }
+    })
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,6 +90,9 @@ const Analysis = () => {
             fetchTagsAnalysis(),
             fetchTrendsAnalysis()
           ])
+
+        // Aggregate the trend data
+        const aggregatedTrendData = aggregateTrendData(trendsAnalysis)
 
         const mappedEmotions = emotionsAnalysis.map(item => ({
           name: getNameByIdOrDirectName(item._id, emotions),
@@ -70,7 +105,8 @@ const Analysis = () => {
         }))
         setEmotionData(mappedEmotions)
         setTagData(mappedTags)
-        setTrendData(trendsAnalysis)
+        setTrendData(aggregatedTrendData)
+
       } catch (err) {
         console.error('Error fetching analysis data:', err)
         setError('Failed to fetch analysis data.')
@@ -79,6 +115,13 @@ const Analysis = () => {
 
     fetchData()
   }, [])
+
+  useEffect(() => {
+    // Only recalculate filtered data when trendData or start/end date change
+    const filtered = filterTrendsByDate(trendData)
+    setFilteredTrendData(filtered)
+  }, [trendData, startDate, endDate])
+
   const filterTrendsByDate = data => {
     if (!startDate && !endDate) return data
 
@@ -92,6 +135,7 @@ const Analysis = () => {
       return true
     })
   }
+
   if (error) {
     return <p>{error}</p>
   }
@@ -104,15 +148,14 @@ const Analysis = () => {
         data: tagData.map(item => item.count),
         backgroundColor: tagData.map(
           (_, index) =>
-            `rgba(${50 + index * 20}, ${100 + index * 15}, ${
-              200 - index * 10
+            `rgba(${50 + index * 20}, ${100 + index * 15}, ${200 - index * 10
             }, 0.6)`
         ),
         borderWidth: 1
       }
     ]
   }
-  //  Popular Emotions Chart
+  // Popular Emotions Chart
   const pieEmotionData = {
     labels: emotionData.map(item => item.name),
     datasets: [
@@ -120,27 +163,29 @@ const Analysis = () => {
         data: emotionData.map(item => item.count),
         backgroundColor: emotionData.map(
           (_, index) =>
-            `rgba(${200 - index * 10}, ${50 + index * 20}, ${
-              100 + index * 15
+            `rgba(${200 - index * 10}, ${50 + index * 20}, ${100 + index * 15
             }, 0.6)`
         ),
         borderWidth: 1
       }
     ]
   }
-  const filteredTrendData = filterTrendsByDate(trendData)
-  const trendedChartData = {
-    labels: filteredTrendData.map(item => `${item._id.year}-${item._id.month}`),
+
+  // Prepare data for Trend Chart
+  const trendChartData = {
+    labels: filteredTrendData.map(item => `${item.year}-${item.month}`), // Format as 'YYYY-MM'
     datasets: [
       {
         label: 'Dream Trends Over Time',
-        data: filteredTrendData.map(item => item.count),
+        data: filteredTrendData.map(item => item.count), // Use filtered count values
         backgroundColor: 'rgba(255, 159, 64, 0.2)',
         borderColor: 'rgba(255, 159, 64, 1)',
         borderWidth: 1
       }
     ]
   }
+
+  // Prepare data for Emotion Chart
   const emotionChartData = {
     labels: emotionData.map(item => item.name),
     datasets: [
@@ -168,24 +213,24 @@ const Analysis = () => {
     ]
   }
 
-  // Prepare data for Trend Chart
-  const trendChartData = {
-    labels: trendData.map(item => `${item._id.year}-${item._id.month}`),
-    datasets: [
-      {
-        label: 'Dream Trends Over Time',
-        data: trendData.map(item => item.count),
-        backgroundColor: 'rgba(255, 159, 64, 0.2)',
-        borderColor: 'rgba(255, 159, 64, 1)',
-        borderWidth: 1
-      }
-    ]
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false, // Allows custom height/width
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: '',
+      },
+    },
   }
 
   return (
     <div>
       <h1>Dream Analysis</h1>
-      {/* Date Filter */}
+
       <div>
         <label>
           Start Date:
@@ -204,24 +249,41 @@ const Analysis = () => {
           />
         </label>
       </div>
-      <div>
-        <h2>Dreams per Emotion</h2>
-        <Bar data={emotionChartData} key='emotionsChart' />
-        <Pie data={pieTagData} />
-      </div>
-      <div>
-        <h2>Dreams per Tag</h2>
 
-        <Bar data={tagChartData} key='tagsChart' />
-        <Pie data={pieEmotionData} />
+      <div className="chart-container">
+        <h2>Dreams per Emotion</h2>
+
+        <div className="chart-item">
+          <Bar data={emotionChartData} options={chartOptions} key="emotionsChart" />
+        </div>
+
+        <div className="chart-item">
+          <h2>Dreams per Tag</h2>
+          <Pie data={pieTagData} options={chartOptions} />
+        </div>
       </div>
-      <div>
+
+      <div className="chart-container">
+        <h2>Dreams per Tag</h2>
+        <div className="chart-item">
+          <Bar data={tagChartData} options={chartOptions} key="tagsChart" />
+        </div>
+
+        <div className="chart-item">
+          <h2>Dreams per Emotion</h2>
+          <Pie data={pieEmotionData} options={chartOptions} />
+        </div>
+      </div>
+
+      <div className="chart-container">
         <h2>Dream Trends Over Time</h2>
-        <Line data={trendChartData} key='trendsChart' />
-        <Line data={trendedChartData} />
+        <div className="chart-item">
+          <Line data={trendChartData} options={chartOptions} key="trendsChart" />
+        </div>
       </div>
     </div>
   )
 }
 
 export default Analysis
+
