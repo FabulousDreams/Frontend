@@ -1,30 +1,55 @@
-// SimpleLandingPage.js
+import React from "react";
+import { useNavigate } from 'react-router-dom';
 
-const SimpleLandingPage = () => {
+const LandingPage = () => {
+
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate('/signup');
+  }
+
   return (
-    <div id='landing-container'>
-      <header className='landing-header'>
-        <h1>Welcome to The Dream Journal App</h1>
-        <p>
-          Log your dreams, analyze patterns, and explore your subconscious mind.
-        </p>
-        <button className='cta-button'>Get Started</button>
+    <div id="landing-container">
+      <header className="landing-header">
+
+        <div className="hero">
+          <h1>Explore the World of Your Dreams</h1>
+          <p>
+            A personal space to log, analyze, and unlock the mysteries of your
+            subconscious mind.
+          </p>
+          <button className="cta-button" onClick={handleRedirect}>Start Your Journey</button>
+        </div>
       </header>
 
-      <section className='features'>
-        <h2>Features</h2>
-        <ul>
-          <li>📓 Log your dreams with ease</li>
-          <li>📊 Analyze patterns and emotions</li>
-          <li>🌟 Connect with a community of dream enthusiasts</li>
-        </ul>
+      <section className="features">
+        <h2>Why Use DreamCatcher?</h2>
+        <div className="feature-cards">
+          <div className="card">
+            <h3>📓 Dream Logging</h3>
+            <p>Easily record your dreams with tags and emotions.</p>
+          </div>
+          <div className="card">
+            <h3>📊 Analytics</h3>
+            <p>Visualize patterns and gain deeper insights.</p>
+          </div>
+          <div className="card">
+            <h3>🌟 Community</h3>
+            <p>Connect with dreamers worldwide and share experiences.</p>
+          </div>
+        </div>
       </section>
 
-      <footer className='landing-footer'>
-        <p>&copy; 2024 The Dream Journal App</p>
+      <section className="cta-section">
+        <h2>Ready to Uncover Your Dreams?</h2>
+        <button className="cta-button" onClick={handleRedirect}>Get Started Now</button>
+      </section>
+
+      <footer className="landing-footer">
+        <p>&copy; 2024 DreamCatcher App. All rights reserved.</p>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default SimpleLandingPage
+export default LandingPage
