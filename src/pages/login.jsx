@@ -66,7 +66,7 @@ const Login = () => {
                 className={'primary-btn'}
               />
 
-              <button onClick={Signup}>have you not register?</button>
+              <button onClick={Signup}>Create an account</button>
               <p>{feedBackLogin}</p>
             </div>
           </form>
