@@ -49,9 +49,9 @@ const Login = () => {
               <div>
                 <InputField className='inputField mediumInput' label='Password'>
                   <input
-                    type='Password'
-                    id='Password'
-                    name='Password'
+                    type='password'
+                    id='password'
+                    name='password'
                     required
                     value={form.password}
                     onChange={handleInputChange}
@@ -66,7 +66,7 @@ const Login = () => {
                 className={'primary-btn'}
               />
 
-              <button onClick={Signup}>have you not register?</button>
+              <button onClick={Signup}>Create an account</button>
               <p>{feedBackLogin}</p>
             </div>
           </form>
