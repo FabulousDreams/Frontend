@@ -10,6 +10,7 @@ import PublicDreams from '../pages/comunitiesDream'
 import LandingPage from '../pages/landingPage'
 import MyProfile from '../pages/userProfile/userProfile'
 import DreamDetails from '../pages/dreamDetails'
+
 const AppRoutes = () => {
   return (
     <div className='main-area'>
