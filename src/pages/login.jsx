@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
 import { useNavigate } from 'react-router-dom'
-import tent from '../assets/images/tent.jpg'
+import tent from '../assets/images/Starry_night_Van_Gogh_detail_hills.jpg'
 import SignUp from '../pages/signup'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'

@@ -91,6 +91,8 @@
   }
 
   .card {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;

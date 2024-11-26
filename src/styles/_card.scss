@@ -19,6 +19,7 @@ a {
   margin: 16px auto;
   width: 90%;
   height: 250px;
+  // @include card-gradient($color-blue-light, $color-blue-dark);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   .card-image-container {
     width: 25%;

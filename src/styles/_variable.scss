@@ -6,8 +6,8 @@ $royal-blue: #0a2472;
 $pen-blue: #001c55;
 $oxford-blue: #00072d;
 $lavander: #a480cf;
-$color-blue-light: #c5d1fe;
-$color-blue-dark: #c6fef2;
+$color-blue-light: #c5d1fead;
+$color-blue-dark: #c6fef2ce;
 @mixin card-gradient($light, $dark) {
   background: linear-gradient(to right, $light, $dark);
 }
