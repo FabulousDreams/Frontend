@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
 
 const SignUp = () => {
   const [userName, setUserName] = useState('')
@@ -51,61 +54,69 @@ const SignUp = () => {
   }
 
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault()
-        signUp()
-      }}
-    >
-      <div>
-        <label htmlFor='username'>Username</label>
-        <input
-          type='text'
-          id='username'
-          name='username'
-          required
-          value={userName}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          type='email'
-          id='email'
-          name='email'
-          required
-          value={email}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          required
-          value={password}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='confirmPassword'>Confirm Password</label>
-        <input
-          type='password'
-          id='confirmPassword'
-          name='confirmPassword'
-          required
-          value={confirmPassword}
-          onChange={handleInputChange}
-        />
-      </div>
+    <div className='form-container'>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          signUp()
+        }}
+      >
+        <div className='form-control'>
+          <label htmlFor='username'> <span className='label-content'><PersonIcon className='icon' />Username</span></label>
+        
+          <input            
+            type='text'
+            id='username'
+            name='username'
+            required
+            placeholder='Create a username '
+            value={userName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='email'><span className='label-content'><EmailIcon className='icon' />Email</span></label>
+          <input
+            type='email'
+            id='email'
+            name='email'
+            required
+            placeholder='Enter a valid email'
+            value={email}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='password'><span className='label-content'><LockIcon className='icon' />Password</span></label>
+          <input
+            type='password'
+            id='password'
+            name='password'
+            required
+            placeholder='Create a password'
+            value={password}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='confirmPassword'><span className='label-content'><LockIcon className='icon' />Confirm Password</span></label>
+          <input
+            type='password'
+            id='confirmPassword'
+            name='confirmPassword'
+            required
+            placeholder='Repeat created password'
+            value={confirmPassword}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <button type='submit'>Sign Up</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-    </form>
+
+        <button type='submit'>Sign Up</button>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {success && <p style={{ color: 'green' }}>{success}</p>}
+      </form>
+    </div>
   )
 }
 
