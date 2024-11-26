@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom'
 const AuthContext = createContext()
 
 export const useAuthContext = () => useContext(AuthContext)
@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
   const [feedBackLogin, setFeedBackLogin] = useState('')
+  const navigate = useNavigate()
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -55,6 +56,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userDataResponse))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, 500)
       return {
         success: true,
         message: 'Sign-up successful! You can now log in.'

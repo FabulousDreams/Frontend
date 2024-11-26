@@ -1,9 +1,28 @@
 #create-dream {
+  display: flex;
+
   form {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 10px;
-    div {
+    .dream-data {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      gap: 20px;
+    }
+    .text-area {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+  }
+  .checkbox-area {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    .emotion {
       display: flex;
       flex-direction: column;
     }

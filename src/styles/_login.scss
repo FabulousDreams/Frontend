@@ -50,9 +50,17 @@
         height: 80%;
         justify-content: center;
         gap: 10px;
-        div {
-          display: flex;
-          flex-direction: column;
+        h3 {
+          margin-left: 45px;
+          margin-right: auto;
+        }
+        p {
+          width: 100%;
+          text-align: center;
+        }
+        .underline {
+          color: red;
+          cursor: pointer;
         }
       }
     }

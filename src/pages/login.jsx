@@ -5,6 +5,8 @@ import tent from '../assets/images/Starry_night_Van_Gogh_detail_hills.jpg'
 import SignUp from '../pages/signup'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
+import passwordIcon from '../assets/images/password.svg'
+import emailIcon from '../assets/images/email.svg'
 const Login = () => {
   const { login, feedBackLogin } = useAuthContext()
   const navigate = useNavigate()
@@ -28,14 +30,19 @@ const Login = () => {
   }
 
   return (
-    <div id='login-form'>
-      <div className='form-area'>
-        {active ? (
-          <form onSubmit={handleSubmit}>
-            <div className='input-login'>
-              <h3>Login</h3>
-              <div>
-                <InputField className='inputField mediumInput' label='Email'>
+    <>
+      {active ? (
+        <div id='login-form'>
+          <div className='form-area'>
+            <form onSubmit={handleSubmit}>
+              <div className='input-login'>
+                <h3>Login</h3>
+
+                <InputField
+                  iconBefore={emailIcon}
+                  className='inputField mediumInput'
+                  // label='Email'
+                >
                   <input
                     type='email'
                     id='email'
@@ -45,9 +52,12 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                 </InputField>
-              </div>
-              <div>
-                <InputField className='inputField mediumInput' label='Password'>
+
+                <InputField
+                  iconBefore={passwordIcon}
+                  className='inputField mediumInput'
+                  // label='Password'
+                >
                   <input
                     type='password'
                     id='password'
@@ -57,30 +67,34 @@ const Login = () => {
                     onChange={handleInputChange}
                   />
                 </InputField>
+
+                <DreamButton
+                  label='Submit'
+                  enable={true}
+                  size='medium'
+                  className={'primary-btn'}
+                  onClick={handleSubmit}
+                />
+
+                <p>
+                  Create an account?
+                  <p onClick={Signup} className='underline'>
+                    Click here
+                  </p>{' '}
+                </p>
+                <p>{feedBackLogin}</p>
               </div>
+            </form>
 
-              <DreamButton
-                label='Submit'
-                enable={true}
-                size='mediumButton'
-                className={'primary-btn'}
-                onClick={handleSubmit}
-              />
-
-              <p>
-                Create an account?<p onClick={Signup}>Click here</p>{' '}
-              </p>
-              <p>{feedBackLogin}</p>
+            <div className='image-firm'>
+              <img src={tent} alt='tent' />
             </div>
-          </form>
-        ) : (
-          <SignUp />
-        )}
-        <div className='image-firm'>
-          <img src={tent} alt='tent' />
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <SignUp />
+      )}
+    </>
   )
 }
 

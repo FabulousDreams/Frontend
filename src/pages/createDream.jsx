@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
 import { useDreamContext } from '../context/dreamContext'
-
-import axios from 'axios'
+import InputField from '../components/common/inputField'
 
 const CreateDream = () => {
   const { user } = useAuthContext()
@@ -66,83 +65,113 @@ const CreateDream = () => {
   return (
     <div id='create-dream'>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title:</label>
-          <input
-            type='text'
-            name='title'
-            value={form.title}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Description: </label>
-          <textarea
-            name='description'
-            value={form.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Date: </label>
-          <input
-            type='date'
-            name='date'
-            value={form.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Emotions : </label>
-          <select
-            name='emotions'
-            multiple
-            value={form.emotions.map(emotion => emotion._id)}
-            onChange={e => handleDropdownChange(e, emotions)}
-            required
-          >
-            {emotions.map(emotion => (
-              <option key={emotion._id} value={emotion._id}>
-                {emotion.name}
-              </option>
-            ))}
-          </select>
+        <div className='dream-data'>
+          <div className='text-area'>
+            <InputField className='inputField mediumInput' label='Subject'>
+              <input
+                type='text'
+                name='title'
+                value={form.title}
+                onChange={handleChange}
+                required
+              />
+            </InputField>
+            <div>
+              <InputField className='inputField mediumInput' label='Date:'>
+                <input
+                  type='date'
+                  name='date'
+                  value={form.date}
+                  onChange={handleChange}
+                  required
+                />
+              </InputField>
+            </div>
+            <InputField className='inputField mediumInput' label='Description:'>
+              <textarea
+                name='description'
+                value={form.description}
+                onChange={handleChange}
+                required
+              />
+            </InputField>
+            <div>
+              <label>Public:</label>
+              <input
+                type='checkbox'
+                name='isPublic'
+                checked={form.isPublic}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label>Image URL: </label>
+              <input
+                type='text'
+                name='imageUrl'
+                value={form.imageUrl}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
 
-          <label>Tags : </label>
-          <select
-            name='tags'
-            multiple
-            value={form.tags.map(tag => tag._id)}
-            onChange={e => handleDropdownChange(e, tags)}
-            required
-          >
-            {tags.map(tag => (
-              <option key={tag._id} value={tag._id}>
-                {tag.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Public:</label>
-          <input
-            type='checkbox'
-            name='isPublic'
-            checked={form.isPublic}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Image URL: </label>
-          <input
-            type='text'
-            name='imageUrl'
-            value={form.imageUrl}
-            onChange={handleChange}
-          />
+          <div className='checkbox-area'>
+            <div className='emotion'>
+              <label>Emotions:</label>
+              {emotions.map(emotion => (
+                <div key={emotion._id}>
+                  <label className='checkbox-container'>
+                    <input
+                      type='checkbox'
+                      name='emotions'
+                      value={emotion._id}
+                      checked={form.emotions.some(e => e._id === emotion._id)}
+                      onChange={e => {
+                        const { value, checked } = e.target
+                        setForm(prevForm => ({
+                          ...prevForm,
+                          emotions: checked
+                            ? [...prevForm.emotions, emotion]
+                            : prevForm.emotions.filter(e => e._id !== value)
+                        }))
+                      }}
+                    />
+                    <span className='checkmark'></span>
+                    {emotion.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            <hr className='solid' />
+            <div className='emotion'>
+              <label>Tags:</label>
+              {tags.map(tag => (
+                <div key={tag._id}>
+                  <label className='checkbox-container'>
+                    <input
+                      type='checkbox'
+                      name='tags'
+                      value={tag._id}
+                      checked={form.tags.some(t => t._id === tag._id)}
+                      onChange={e => {
+                        const { value, checked } = e.target
+                        setForm(prevForm => ({
+                          ...prevForm,
+                          tags: checked
+                            ? [...prevForm.tags, tag]
+                            : prevForm.tags.filter(t => t._id !== value)
+                        }))
+                      }}
+                    />
+                    <span className='checkmark'></span>
+
+                    {tag.name}
+                  </label>{' '}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         <button type='submit'>Add Dream</button>
       </form>
