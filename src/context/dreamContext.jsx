@@ -8,11 +8,37 @@ export const useDreamContext = () => useContext(DreamContext)
 
 export const DreamProvider = ({ children }) => {
   const { token } = useAuthContext()
+  const [tags, setTags] = useState([])
+  const [emotions, setEmotions] = useState([])
   const [myDreams, setMyDreams] = useState([])
   const [publicDreams, setPublicDreams] = useState([])
   const [specificDream, setSpecificDream] = useState(null)
   const [error, setError] = useState(null) // Handle errors
 
+  const fetchTags = async () => {
+    setError(null)
+    try {
+      const { data } = await axios.get('http://localhost:5005/api/tags', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      setTags(data)
+    } catch (err) {
+      setError('Failed to fetch tags.')
+      console.error('Error fetching tags:', err)
+    }
+  }
+  const fetchEmotions = async () => {
+    setError(null) // Reset error state
+    try {
+      const { data } = await axios.get('http://localhost:5005/api/emotions', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      setEmotions(data) // Set the emotions
+    } catch (err) {
+      setError('Failed to fetch emotions.')
+      console.error('Error fetching emotions:', err)
+    }
+  }
   // fetch user dreams
   const fetchMyDreams = async () => {
     setError(null) // Reset error state
@@ -27,7 +53,7 @@ export const DreamProvider = ({ children }) => {
       setMyDreams(data)
     } catch (error) {
       setError('Oh no, failed to fetch your dreams!')
-      console.error('Error fetching dreams:', err)
+      console.error('Error fetching dreams:', error)
     }
   }
 
@@ -135,6 +161,8 @@ export const DreamProvider = ({ children }) => {
     if (token) {
       fetchMyDreams()
       fetchPublicDreams()
+      fetchTags()
+      fetchEmotions()
     }
   }, [token])
 
@@ -150,6 +178,8 @@ export const DreamProvider = ({ children }) => {
         createDream,
         updateDream,
         deleteDream,
+        tags,
+        emotions,
         error
       }}
     >

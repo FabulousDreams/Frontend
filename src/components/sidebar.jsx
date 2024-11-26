@@ -34,7 +34,7 @@ const Sidebar = () => {
           </li>
 
           <li className='menu-item'>
-            <Link to='/public-dreams'>
+            <Link to='/analysis'>
               <AutoGraphIcon /> <span>Analytics</span>
             </Link>
           </li>

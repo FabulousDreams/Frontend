@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 
 import { useDreamContext } from '../context/dreamContext'
-import AddnewComment from '../components/createComment'
-import CommentList from '../components/commentList'
+
 import Card from '../components/CardComponent'
 
 const YourDreams = () => {
-  const { myDreams, updateDream, deleteDream } = useDreamContext()
-  const [dreams, setDreams] = useState([])
+  const { myDreams, updateDream, deleteDream, tags, emotions } =
+    useDreamContext()
 
+  const [dreams, setDreams] = useState([])
   const [editingId, setEditingId] = useState(null)
   const [editedDream, setEditedDream] = useState({})
   const [loading, setLoading] = useState(true)
@@ -16,7 +16,19 @@ const YourDreams = () => {
     setDreams(myDreams)
     setLoading(false)
   }, [myDreams])
+  const getEmotionNames = emotionIds => {
+    return emotionIds.map(id => {
+      const emotion = emotions.find(emotion => emotion._id === id)
+      return emotion ? emotion.name : 'Unknown Emotion'
+    })
+  }
 
+  const getTagNames = tagIds => {
+    return tagIds.map(id => {
+      const tag = tags.find(tag => tag._id === id)
+      return tag ? tag.name : 'Unknown Tag'
+    })
+  }
   const handleEditClick = dream => {
     setEditingId(dream._id)
     setEditedDream(dream)
@@ -44,6 +56,9 @@ const YourDreams = () => {
       <h1>Your Dreams</h1>
       <ul>
         {dreams.map(dream => {
+          const emotionNames = getEmotionNames(dream.emotions || [])
+          const tagNames = getTagNames(dream.tags || [])
+
           return (
             <li key={dream._id}>
               {editingId === dream._id ? (
@@ -68,8 +83,8 @@ const YourDreams = () => {
                   title={dream.title}
                   subtitle={dream.subtitle}
                   description={dream.description}
-                  emotions={dream.emotions}
-                  tags={dream.tags}
+                  emotions={emotionNames}
+                  tags={tagNames}
                   imageUrl={dream.imageUrl}
                   onEditItem={() => handleEditClick(dream)}
                   onDeleteItem={handleDelete}
