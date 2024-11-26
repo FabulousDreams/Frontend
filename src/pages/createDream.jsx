@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
+import { useDreamContext } from '../context/dreamContext'
 
 import axios from 'axios'
 
 const CreateDream = () => {
   const { user } = useAuthContext()
+  const { tags, emotions, createDream, error } = useDreamContext()
+
   const [form, setForm] = useState({
     title: '',
     description: '',
@@ -26,11 +29,6 @@ const CreateDream = () => {
         ...prevForm,
         [name]: checked
       }))
-    } else if (name === 'emotions' || name === 'tags') {
-      setForm(prevForm => ({
-        ...prevForm,
-        [name]: value.split(',').map(item => item.trim())
-      }))
     } else {
       setForm(prevForm => ({
         ...prevForm,
@@ -38,7 +36,17 @@ const CreateDream = () => {
       }))
     }
   }
+  const handleDropdownChange = (e, dataSource) => {
+    const { name } = e.target
+    const selectedOptions = Array.from(e.target.selectedOptions, option => {
+      return dataSource.find(item => item._id === option.value)
+    })
 
+    setForm(prevForm => ({
+      ...prevForm,
+      [name]: selectedOptions
+    }))
+  }
   const handleSubmit = async e => {
     e.preventDefault()
 
@@ -48,8 +56,8 @@ const CreateDream = () => {
     }
 
     try {
-      await axios.post('/api/dreams', dreamData)
-      // navigate("/dre");
+      await createDream(dreamData)
+      // navigate('/mine-dreams')
     } catch (error) {
       console.error('Error creating a new dream', error)
     }
@@ -88,21 +96,35 @@ const CreateDream = () => {
           />
         </div>
         <div>
-          <label>Emotions (comma separated): </label>
-          <input
-            type='text'
+          <label>Emotions : </label>
+          <select
             name='emotions'
-            value={form.emotions.join(',')}
-            onChange={handleChange}
-          />
+            multiple
+            value={form.emotions.map(emotion => emotion._id)}
+            onChange={e => handleDropdownChange(e, emotions)}
+            required
+          >
+            {emotions.map(emotion => (
+              <option key={emotion._id} value={emotion._id}>
+                {emotion.name}
+              </option>
+            ))}
+          </select>
 
-          <label>Tags (comma separated): </label>
-          <input
-            type='text'
+          <label>Tags : </label>
+          <select
             name='tags'
-            value={form.tags.join(',')}
-            onChange={handleChange}
-          />
+            multiple
+            value={form.tags.map(tag => tag._id)}
+            onChange={e => handleDropdownChange(e, tags)}
+            required
+          >
+            {tags.map(tag => (
+              <option key={tag._id} value={tag._id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
           <label>Public:</label>
