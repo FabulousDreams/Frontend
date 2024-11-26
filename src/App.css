@@ -1,5 +1,3 @@
-
-
 nav {
   display: flex;
   align-items: center;
@@ -42,10 +40,10 @@ nav h1 {
   color: #85bda6;
 }
 
-
+/* 
 /******* signup *******/
 
-.form-container {
+/* .form-container {
   position: relative;
   display: flex;
   justify-content: center;
@@ -139,11 +137,4 @@ p[style='color: red'] {
 
 p[style='color: green'] {
   color: green;
-}
-
-
-
-
-
-
-
+} */
