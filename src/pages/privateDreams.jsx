@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-
 import { useDreamContext } from '../context/dreamContext'
-
 import Card from '../components/CardComponent'
 
 const YourDreams = () => {
@@ -54,44 +52,44 @@ const YourDreams = () => {
   return (
     <div>
       <h1>Your Dreams</h1>
-      <ul>
-        {dreams.map(dream => {
-          const emotionNames = getEmotionNames(dream.emotions || [])
-          const tagNames = getTagNames(dream.tags || [])
 
-          return (
-            <li key={dream._id}>
-              {editingId === dream._id ? (
-                <div>
-                  <input
-                    type='text'
-                    name='title'
-                    value={editedDream.title || ''}
-                    onChange={handleInputChange}
-                  />
-                  <textarea
-                    name='description'
-                    value={editedDream.description || ''}
-                    onChange={handleInputChange}
-                  />
-                  <button onClick={handleSaveClick}>Save</button>
-                  <button onClick={() => setEditingId(null)}>Cancel</button>
-                </div>
-              ) : (
-                <Card
-                  id={dream._id}
-                  title={dream.title}
-                  subtitle={dream.subtitle}
-                  description={dream.description}
-                  emotions={emotionNames}
-                  tags={tagNames}
-                  imageUrl={dream.imageUrl}
-                  onEditItem={() => handleEditClick(dream)}
-                  onDeleteItem={handleDelete}
+      {dreams.map(dream => {
+        const emotionNames = getEmotionNames(dream.emotions || [])
+        const tagNames = getTagNames(dream.tags || [])
+
+        return (
+          <div key={dream._id}>
+            {editingId === dream._id ? (
+              <div>
+                <input
+                  type='text'
+                  name='title'
+                  value={editedDream.title}
+                  onChange={handleInputChange}
                 />
-              )}
+                <textarea
+                  name='description'
+                  value={editedDream.description}
+                  onChange={handleInputChange}
+                />
+                <button onClick={handleSaveClick}>Save</button>
+                <button onClick={() => setEditingId(null)}>Cancel</button>
+              </div>
+            ) : (
+              <Card
+                id={dream._id}
+                title={dream.title}
+                subtitle={dream.subtitle}
+                description={dream.description}
+                emotions={emotionNames}
+                tags={tagNames}
+                imageUrl={dream.imageUrl}
+                onEditItem={() => handleEditClick(dream)}
+                onDeleteItem={handleDelete}
+              />
+            )}
 
-              {/* <CommentList
+            {/* <CommentList
                 dreamId={dream._id}
                 newComment={newComments[dream._id]}
               />
@@ -101,10 +99,9 @@ const YourDreams = () => {
                   handleNewComment(dream._id, newComment)
                 }
               /> */}
-            </li>
-          )
-        })}
-      </ul>
+          </div>
+        )
+      })}
     </div>
   )
 }

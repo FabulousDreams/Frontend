@@ -7,8 +7,9 @@ const DreamButton = ({
   enable,
   onClick,
   label,
-  selected,
   options
+  // selected,
+  // options
 }) => {
   const [showOption, setShowOption] = useState(false)
   const buttonClasses = classNames(
@@ -18,9 +19,9 @@ const DreamButton = ({
       mediumButton: size === 'medium',
       largeButton: size === 'large',
       xlargeButton: size === 'xlarge',
-      removeButton: size === 'remove',
-      selected: selected,
-      deselected: !selected
+      removeButton: size === 'remove'
+      // selected: selected,
+      // deselected: !selected
     },
     className
   )
