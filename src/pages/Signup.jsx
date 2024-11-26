@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import PersonIcon from '@mui/icons-material/Person';
-import EmailIcon from '@mui/icons-material/Email';
-import LockIcon from '@mui/icons-material/Lock';
-
+import PersonIcon from '@mui/icons-material/Person'
+import EmailIcon from '@mui/icons-material/Email'
+import LockIcon from '@mui/icons-material/Lock'
+import InputField from '../components/common/inputField'
+import DreamButton from '../components/common/button'
+import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -52,30 +54,32 @@ const SignUp = () => {
     if (name === 'password') setPassword(value)
     if (name === 'confirmPassword') setConfirmPassword(value)
   }
+  const navigate = useNavigate()
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    signUp()
+    navigate('/dashboard')
+  }
 
   return (
-    <div className='form-container'>
-      <form
-        onSubmit={e => {
-          e.preventDefault()
-          signUp()
-        }}
-      >
-        <div className='form-control'>
-          <label htmlFor='username'> <span className='label-content'><PersonIcon className='icon' />Username</span></label>
-        
-          <input            
+    <form onSubmit={handleSubmit}>
+      <div className='input-login'>
+        <InputField className='inputField mediumInput' label='Username'>
+          <PersonIcon className='icon' />
+          <input
             type='text'
             id='username'
             name='username'
             required
-            placeholder='Create a username '
             value={userName}
+            placeholder='Create a username '
             onChange={handleInputChange}
           />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='email'><span className='label-content'><EmailIcon className='icon' />Email</span></label>
+        </InputField>
+
+        <InputField className='inputField mediumInput' label='Email'>
+          <EmailIcon className='icon' />
           <input
             type='email'
             id='email'
@@ -85,9 +89,9 @@ const SignUp = () => {
             value={email}
             onChange={handleInputChange}
           />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='password'><span className='label-content'><LockIcon className='icon' />Password</span></label>
+        </InputField>
+        <InputField className='inputField mediumInput' label='  Password'>
+          <LockIcon className='icon' />
           <input
             type='password'
             id='password'
@@ -97,9 +101,10 @@ const SignUp = () => {
             value={password}
             onChange={handleInputChange}
           />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='confirmPassword'><span className='label-content'><LockIcon className='icon' />Confirm Password</span></label>
+        </InputField>
+
+        <InputField className='inputField mediumInput' label='Confirm Password'>
+          <LockIcon className='icon' />
           <input
             type='password'
             id='confirmPassword'
@@ -109,14 +114,19 @@ const SignUp = () => {
             value={confirmPassword}
             onChange={handleInputChange}
           />
-        </div>
+        </InputField>
 
-
-        <button type='submit'>Sign Up</button>
+        <DreamButton
+          label='Sign up'
+          enable={true}
+          size='mediumButton'
+          className={'primary-btn'}
+          onClick={handleSubmit}
+        />
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>{success}</p>}
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }
 

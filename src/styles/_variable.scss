@@ -1,8 +1,13 @@
 $deep-happy: #007b83;
 $happy-green: #4caf50;
-$non-photo-blue: #A6E1FA;
-$caribbean-blue: #0E6BA8;
-$royal-blue: #0A2472;
-$pen-blue: #001C55;
-$oxford-blue: #00072D;
-$lavander: #a480cf; 
+$non-photo-blue: #a6e1fa;
+$caribbean-blue: #0e6ba8;
+$royal-blue: #0a2472;
+$pen-blue: #001c55;
+$oxford-blue: #00072d;
+$lavander: #a480cf;
+$color-blue-light: #c5d1fe;
+$color-blue-dark: #c6fef2;
+@mixin card-gradient($light, $dark) {
+  background: linear-gradient(to right, $light, $dark);
+}

@@ -37,26 +37,25 @@ const PublicDreams = () => {
   return (
     <div>
       <h1>public Dreams</h1>
-      <ul>
-        {dreams.map(dream => {
-          const emotionNames = getEmotionNames(dream.emotions || [])
-          const tagNames = getTagNames(dream.tags || [])
 
-          return (
-            <div key={dream._id}>
-              <Card
-                id={dream._id}
-                title={dream.title}
-                subtitle={dream.subtitle}
-                description={dream.description}
-                emotions={emotionNames}
-                tags={tagNames}
-                imageUrl={dream.imageUrl}
-              />
-            </div>
-          )
-        })}
-      </ul>
+      {dreams.map(dream => {
+        const emotionNames = getEmotionNames(dream.emotions || [])
+        const tagNames = getTagNames(dream.tags || [])
+
+        return (
+          <div key={dream._id}>
+            <Card
+              id={dream._id}
+              title={dream.title}
+              subtitle={dream.subtitle}
+              description={dream.description}
+              emotions={emotionNames}
+              tags={tagNames}
+              imageUrl={dream.imageUrl}
+            />
+          </div>
+        )
+      })}
     </div>
   )
 }

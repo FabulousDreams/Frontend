@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-
 import { useDreamContext } from '../context/dreamContext'
-
 import Card from '../components/CardComponent'
 
 const YourDreams = () => {
@@ -66,12 +64,12 @@ const YourDreams = () => {
                 <input
                   type='text'
                   name='title'
-                  value={editedDream.title || ''}
+                  value={editedDream.title}
                   onChange={handleInputChange}
                 />
                 <textarea
                   name='description'
-                  value={editedDream.description || ''}
+                  value={editedDream.description}
                   onChange={handleInputChange}
                 />
                 <button onClick={handleSaveClick}>Save</button>

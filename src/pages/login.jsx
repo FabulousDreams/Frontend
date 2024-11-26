@@ -58,15 +58,18 @@ const Login = () => {
                   />
                 </InputField>
               </div>
-              <button type='submit'>Submit</button>
+
               <DreamButton
-                label='Add'
+                label='Submit'
                 enable={true}
-                size='small'
+                size='mediumButton'
                 className={'primary-btn'}
+                onClick={handleSubmit}
               />
 
-              <button onClick={Signup}>Create an account</button>
+              <p>
+                Create an account?<p onClick={Signup}>Click here</p>{' '}
+              </p>
               <p>{feedBackLogin}</p>
             </div>
           </form>
