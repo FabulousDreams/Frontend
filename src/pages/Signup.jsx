@@ -8,7 +8,7 @@ import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import Login from './login'
 
-import tent from '../assets/images/Starry_night_Van_Gogh_detail_hills.jpg'
+import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg';
 
 const SignUp = () => {
   const { signUp } = useAuthContext()
@@ -124,7 +124,7 @@ const SignUp = () => {
               </div>
             </form>
             <div className='image-firm'>
-              <img src={tent} alt='tent' />
+              <img src={Over_the_Rhone} alt='stary night painting' />
             </div>
           </div>
         </div>

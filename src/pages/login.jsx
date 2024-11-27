@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
 import { useNavigate } from 'react-router-dom'
-import tent from '../assets/images/Starry_night_Van_Gogh_detail_hills.jpg'
+import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg';
 import SignUp from './signup'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import passwordIcon from '../assets/images/password.svg'
 import emailIcon from '../assets/images/email.svg'
+
 const Login = () => {
   const { login, feedBackLogin } = useAuthContext()
   const navigate = useNavigate()
@@ -87,7 +88,7 @@ const Login = () => {
             </form>
 
             <div className='image-firm'>
-              <img src={tent} alt='tent' />
+              <img src={Over_the_Rhone} alt='stary night painting' />
             </div>
           </div>
         </div>
