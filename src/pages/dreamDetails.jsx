@@ -19,7 +19,8 @@ const DreamDetails = () => {
   } = useDreamContext()
 
   const [newComments, setNewComments] = useState({})
-
+  const [editingId, setEditingId] = useState(null)
+  const [editedDream, setEditedDream] = useState({})
   const handleNewComment = (dreamId, newComment) => {
     setNewComments(prev => ({
       ...prev,
@@ -45,7 +46,21 @@ const DreamDetails = () => {
       return tag ? tag.name : 'Unknown Tag'
     })
   }
-
+  const handleEditClick = dream => {
+    setEditingId(dream._id)
+    setEditedDream(dream)
+  }
+  const handleDelete = async dreamId => {
+    await deleteDream(dreamId)
+  }
+  const handleInputChange = e => {
+    const { name, value } = e.target
+    setEditedDream(prev => ({ ...prev, [name]: value }))
+  }
+  const handleSaveClick = async () => {
+    await updateDream(editingId, editedDream)
+    setEditingId(null)
+  }
   if (error) return <p>{error}</p>
   if (!specificDream) return <p>Loading...</p>
 
@@ -55,18 +70,35 @@ const DreamDetails = () => {
     <div>
       {specificDream ? (
         <>
-          <Card
-            id={specificDream._id}
-            title={specificDream.title}
-            subtitle={specificDream.subtitle}
-            description={specificDream.description}
-            emotions={emotionNames}
-            tags={tagNames}
-            imageUrl={specificDream.imageUrl}
-            // onEditItem={() => handleEditClick(dream)}
-            // onDeleteItem={handleDelete}
-          />
-
+          {editingId === specificDream._id ? (
+            <div>
+              <input
+                type='text'
+                name='title'
+                value={editedDream.title}
+                onChange={handleInputChange}
+              />
+              <textarea
+                name='description'
+                value={editedDream.description}
+                onChange={handleInputChange}
+              />
+              <button onClick={handleSaveClick}>Save</button>
+              <button onClick={() => setEditingId(null)}>Cancel</button>
+            </div>
+          ) : (
+            <Card
+              id={specificDream._id}
+              title={specificDream.title}
+              subtitle={specificDream.subtitle}
+              description={specificDream.description}
+              emotions={emotionNames}
+              tags={tagNames}
+              imageUrl={specificDream.imageUrl}
+              onEditItem={(id, updatedData) => updateDream(id, updatedData)}
+              onDeleteItem={handleDelete}
+            />
+          )}
           <CommentList
             dreamId={specificDream._id}
             newComment={newComments[specificDream._id]}
