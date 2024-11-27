@@ -9,6 +9,11 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
+  const [isOpen, setIsopen] = useState(false)
+  const ToggleSidebar = () => {
+    setIsopen(!isOpen)
+  }
+
   // 1-function to handle sidebar at mobile size
   // 2.having logo or image for clicking on it
 
@@ -20,6 +25,9 @@ const Sidebar = () => {
         {/* </button> */}
       </div>
       <div className='sidebar  open closed'>
+        <button className='btn' onClick={ToggleSidebar}>
+          toggle
+        </button>
         <ul className='sidebar-list'>
           <li className='menu-item'>
             <Link to='/dashboard'>

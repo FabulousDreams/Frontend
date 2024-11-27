@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
 import { useNavigate } from 'react-router-dom'
 import tent from '../assets/images/Starry_night_Van_Gogh_detail_hills.jpg'
-import SignUp from '../pages/signup'
+import SignUp from './signup'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import passwordIcon from '../assets/images/password.svg'
@@ -11,12 +11,13 @@ const Login = () => {
   const { login, feedBackLogin } = useAuthContext()
   const navigate = useNavigate()
   const [form, setForm] = useState({
-    email: 'admin@gmail.com',
-    password: 'I123456Ma'
+    email: '',
+    password: ''
   })
   const [active, setActive] = useState(true)
-  const Signup = () => {
-    setActive(!active)
+  const redirectSignup = () => {
+    setActive(false)
+    console.log('set login', active)
   }
   const handleInputChange = e => {
     const { name, value } = e.target
@@ -78,7 +79,7 @@ const Login = () => {
 
                 <p>
                   Create an account?
-                  <p onClick={Signup} className='underline'>
+                  <p onClick={redirectSignup} className='underline'>
                     Click here
                   </p>
                 </p>
