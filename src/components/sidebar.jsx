@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import NightsStayIcon from '@mui/icons-material/NightsStay'
 import PublicIcon from '@mui/icons-material/Public'
 import AddBoxIcon from '@mui/icons-material/AddBox'
@@ -12,6 +12,7 @@ const Sidebar = () => {
   const [isOpen, setIsopen] = useState(false)
   const ToggleSidebar = () => {
     setIsopen(!isOpen)
+    console.log(isOpen)
   }
 
   // 1-function to handle sidebar at mobile size
@@ -24,12 +25,12 @@ const Sidebar = () => {
         {/* <img src={wlogo} className='logo-image' alt='Logo' /> */}
         {/* </button> */}
       </div>
-      <div className='sidebar  open closed'>
+      <div className={`sidebar  open closed ${isOpen ? 'toggle-sidebar' : ''}`}>
         <button className='btn' onClick={ToggleSidebar}>
           toggle
         </button>
         <ul className='sidebar-list'>
-          <li className='menu-item'>
+          <li className={`menu-item ${isOpen ? '' : 'hide'}`}>
             <Link to='/dashboard'>
               <NightsStayIcon /> <span>Dashboard</span>
             </Link>

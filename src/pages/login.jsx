@@ -17,7 +17,6 @@ const Login = () => {
   const [active, setActive] = useState(true)
   const redirectSignup = () => {
     setActive(false)
-    console.log('set login', active)
   }
   const handleInputChange = e => {
     const { name, value } = e.target

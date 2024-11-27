@@ -15,6 +15,11 @@
   //   color: $primary-vibrant-red-trans;
   transition: transform 0.3s ease;
 }
+.toggle-sidebar {
+  background-color: #8faadf;
+  width: 70px;
+  margin-right: 0;
+}
 .menu-item {
   padding: 8px 10px;
   list-style-type: none;
@@ -30,6 +35,9 @@
       color: #f7f7f7;
     }
   }
+}
+.hide {
+  display: nonez;
 }
 @media (max-width: 490px) {
   .sidebar {
