@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUserContext } from '../../context/userContext';
-import { Card, Avatar, CircularProgress, Button, TextField } from '@mui/material';
+import { Card, Avatar, CircularProgress, Button, TextField, Snackbar, Alert } from '@mui/material';
+import { useAuthContext } from '../../context/authContext';
 
 const Profile = () => {
-  const { user, fetchUserProfile } = useUserContext();
+  const { user, fetchUserProfile, updateUserProfile } = useUserContext();
+  const { token } = useAuthContext();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ username: '', profileImageUrl: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     fetchUserProfile();
   }, []);
-
-  console.log('Stored Token:', localStorage.getItem('token'));
 
   useEffect(() => {
     if (user && !isEditing) {
@@ -34,18 +36,21 @@ const Profile = () => {
     setLoading(true);
     setError('');
     try {
-      await axios.put(
-        '/api/profile',
-        { username: formData.username, profileImageUrl: formData.profileImageUrl },
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      );
+      await updateUserProfile(formData);
+      setSuccessMessage('Profile updated successfully!');
+      setSnackbarOpen(true); 
       setIsEditing(false);
-      await fetchUserProfile(); // refresh user data after saving
-    } catch (error) {
-      setError(error.response?.data?.message || 'Error updating profile');
+      fetchUserProfile(); 
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error updating profile');
+      setSnackbarOpen(true); 
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   if (!user) {
@@ -122,6 +127,17 @@ const Profile = () => {
           )}
         </div>
       </Card>
+
+      
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert onClose={handleSnackbarClose} severity={error ? 'error' : 'success'}>
+          {error || successMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
