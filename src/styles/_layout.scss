@@ -25,7 +25,7 @@ p {
       margin-top: 20px;
       margin-left: 25px;
       flex: 1;
-      overflow-y: auto;
+      overflow-y: hidden;
       transition: margin-left 0.3s ease;
     }
   }
