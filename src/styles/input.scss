@@ -2,73 +2,75 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  align-items: center;
 }
 
 .inputContainer label {
   font-weight: bold;
   color: #555;
   margin-bottom: 8px;
+  text-align: left;
 }
 
 .inputContainer .inputField {
   display: flex;
-  height: 45px;
   padding: 1px 0;
   padding-left: 14px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
   margin: 8px 0;
   align-items: center;
-
-  border-radius: 7px;
-  //   transition: box-shadow 0.3s, border-color 0.3s;
+  border: 0.75px solid #007b83;
+  border-radius: 5px;
 }
-
+.inputContainer .inputField.comment-area {
+  width: 90%;
+}
 .inputContainer .inputField.largeInput {
   width: 420px;
 }
 
 .inputContainer .inputField.mediumInput {
-  width: 220px;
+  width: 250px;
 }
 
 .inputContainer .inputField.smallInput {
   width: 120px;
 }
 
+/* Shared styles for input and textarea */
 .inputContainer textarea,
 .inputContainer input {
   border: none;
-  min-height: 38px;
   margin-left: 11px;
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
   font-weight: bold;
-  border-radius: 15px;
+  border-radius: 0 5px 5px 0px;
   box-sizing: border-box;
-
-  color: #333;
-  background-color: #f3faff;
-  transition: border-color 0.3s ease;
-
   background-color: #f3faff;
   padding: 10px 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
   font-size: 1em;
   color: #333;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
   transition: border-color 0.3s ease;
+}
 
-  &:focus {
-    border-color: #007b83;
-  }
+/* Input-specific styles */
+.inputContainer input {
+  min-height: 38px;
+  width: 100%; /* Keep input responsive */
+}
+
+/* Textarea-specific styles */
+.inputContainer textarea {
+  min-height: 120px;
+  width: 100%; /* Fixed width for textarea */
+  resize: vertical; /* Allows resizing vertically only */
 }
 
 .inputContainer textarea:focus,
 .inputContainer input:focus {
-  // border-color: #ffcc00;
   outline: none;
+  border-color: #007b83;
 }
 
 .inputContainer input::placeholder {
@@ -111,11 +113,11 @@
     width: 100%;
   }
 
-  .inputContainer input,
   .inputContainer textarea {
-    min-height: 36px;
-    padding: 2px;
+    padding: 10px;
     font-size: 0.9rem;
     border-radius: 4px;
+    width: 100%; /* Ensure textarea adjusts to screen width on small screens */
+    min-height: 120px;
   }
 }

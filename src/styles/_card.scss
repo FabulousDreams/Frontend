@@ -5,67 +5,78 @@
   gap: 16px;
   justify-content: center;
 }
-
+a {
+  text-decoration: none;
+}
 .card {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
-  margin: 16px 0;
-  width: 300px;
+  margin: 16px auto;
+  width: 90%;
   height: 250px;
+  @include card-gradient($color-blue-light, $color-blue-dark);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+  .card-image-container {
+    width: 25%;
+  }
+  .card-content {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 5px;
+  }
+  .card-actions {
+    display: flex;
+    margin-left: auto;
+    .edit-icon {
+      position: absolute;
+      top: 16px;
+      right: 45px;
+      color: #f7bd50;
+      cursor: pointer;
+      font-size: 24px;
+      transition: transform 0.2s ease;
+    }
 
-.card-content {
-  text-align: left;
-}
+    .edit-icon:hover {
+      transform: scale(1.5);
+    }
 
-.card-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
+    .delete-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      color: #d32f2f;
+      cursor: pointer;
+      font-size: 24px;
+      transition: transform 0.2s ease;
+    }
 
-.card-subtitle {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 16px;
-}
+    .delete-icon:hover {
+      transform: scale(1.5);
+    }
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
 
-.card-description {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 16px;
-}
+  .card-subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
 
-.edit-icon {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  color: #f7bd50;
-  cursor: pointer;
-  font-size: 24px;
-  transition: transform 0.2s ease;
-}
-
-.edit-icon:hover {
-  transform: scale(1.5);
-}
-
-.delete-icon {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  color: #d32f2f;
-  cursor: pointer;
-  font-size: 24px;
-  transition: transform 0.2s ease;
-}
-
-.delete-icon:hover {
-  transform: scale(1.5);
+  .card-description {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
 }

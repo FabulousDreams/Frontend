@@ -41,14 +41,14 @@ const CommentList = ({ dreamId, newComment }) => {
   }
 
   return (
-    <ul>
+    <>
       {comments.map(comment => (
-        <li key={comment._id}>
+        <div id='comment' key={comment._id}>
           <p>{comment.text}</p>
           <button onClick={() => handleDelete(comment._id)}>Delete</button>
-        </li>
+        </div>
       ))}
-    </ul>
+    </>
   )
 }
 

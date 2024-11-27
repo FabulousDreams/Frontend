@@ -5,10 +5,13 @@
 @import './card';
 @import './navbar';
 @import './sidebar';
+@import './navbar';
 @import './layout';
+@import './comment';
+
+@import './checkbox';
 
 //pages:
-
 @import './landing';
 @import './chart';
 @import './login';

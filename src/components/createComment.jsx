@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { addComment } from '../services/commentService'
+import InputField from './common/inputField'
+import DreamButton from './common/button'
 const AddnewComment = ({ dreamId, onCommentAdded }) => {
   const [text, setText] = useState('')
   const [error, setError] = useState(null)
@@ -18,14 +20,27 @@ const AddnewComment = ({ dreamId, onCommentAdded }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <textarea
-        value={text}
-        onChange={e => setText(e.target.value)}
-        placeholder='Write your comment...'
-        required
-      ></textarea>
+      <InputField
+        className='inputField comment-area'
+        // label='Email'
+      >
+        <textarea
+          value={text}
+          onChange={e => setText(e.target.value)}
+          placeholder='Write your comment...'
+          required
+        />
+      </InputField>
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button type='submit'>Add Comment</button>
+
+      <DreamButton
+        label='Add Comment'
+        enable={true}
+        size='small'
+        className={'primary-btn comment-position'}
+        onClick={handleSubmit}
+      />
     </form>
   )
 }
