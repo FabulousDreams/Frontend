@@ -230,24 +230,6 @@ const Analysis = () => {
   return (
     <div>
       <h1>Dream Analysis</h1>
-      <div>
-        <label>
-          Start Date:
-          <input
-            type='date'
-            value={startDate}
-            onChange={e => setStartDate(e.target.value)}
-          />
-        </label>
-        <label>
-          End Date:
-          <input
-            type='date'
-            value={endDate}
-            onChange={e => setEndDate(e.target.value)}
-          />
-        </label>
-      </div>
       <h2>Dreams per Emotion</h2>
       <label className='toggle-switch'>
         <input
