@@ -62,7 +62,7 @@
     align-items: center;
   }
   .sidebar-footer {
-    margin-top: 45vh;
+    margin-top: 40vh;
     padding: 12px;
     border-top: 1px solid white;
     ul {
@@ -89,7 +89,7 @@
       }
     }
   }
-  /* Hide text when collapsed */
+
   &.closed .menu-item span {
     display: none;
   }
