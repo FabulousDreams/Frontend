@@ -1,4 +1,62 @@
 nav {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #bedcfe;
+    position: sticky;
+    top: 0;
+    min-height: 70px;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  
+    h1 {
+      color: #32213a;
+    }
+  
+    .navbar-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+  
+    .navbar-item {
+      display: flex;
+      align-items: center;
+    }
+  
+    .navbar-link {
+      text-decoration: none;
+      color: #32213a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 16px;
+      font-weight: bold;
+  
+      &:hover {
+        color: #85bda6;
+      }
+    }
+  
+    .navbar-user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+  
+      .MuiAvatar-root {
+        margin-left: 1rem;  // Adjusted position on the left side
+      }
+  
+      .navbar-username {
+        font-weight: bold;
+        font-size: 1rem;
+      }
+    }
+  }
+=======
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,4 +98,4 @@ nav h1 {
   color: #85bda6;
 }
 
-/******* signup *******/
+

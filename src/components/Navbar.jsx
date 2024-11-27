@@ -1,8 +1,26 @@
-import '../app.css'
-import { NavbarData } from './NavbarData'
+import { Link } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
+import { Avatar } from '@mui/material'
 
-function Navbar () {
+
+const NavbarData = [
+  
+ 
+  {
+    title: 'Login',
+    icon: null,
+    link: '/login',
+    protected: false
+  },
+  {
+    title: 'Sign Up',
+    icon: null,
+    link: '/signup',
+    protected: false
+  }
+]
+
+function Navbar() {
   const { user, logout } = useAuthContext()
 
   const filteredNavbarData = NavbarData.filter(item => {
@@ -33,6 +51,18 @@ function Navbar () {
           </li>
         ))}
       </ul>
+
+      {user && (
+        <div className="navbar-user-info">
+          <Link to="/profile">
+            <Avatar
+              src={user.profileImageUrl || 'https://via.placeholder.com/150'}
+              alt="User Avatar"
+            />
+          </Link>
+          <span className="navbar-username">{user.username}</span>
+        </div>
+      )}
     </nav>
   )
 }

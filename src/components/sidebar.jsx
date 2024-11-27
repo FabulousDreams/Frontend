@@ -7,12 +7,22 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
+
+
+const Sidebar = () => {
+  const [openSidebar, setOpenSidebar] = useState(false)
+  // 1-function to handle sidebar at mobile size
+  // 2.having logo or image for clicking on it
+
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import LogoutIcon from '@mui/icons-material/Logout'
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   // const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const { user, logout } = useAuthContext()
+
 
   return (
     <>
@@ -31,8 +41,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         >
           <li className='menu-item'>
             <Link to='/dashboard'>
+
+              <NightsStayIcon /> <span>Dreams Dashboard</span>
+
               <NightsStayIcon />
               {isSidebarOpen && <span>Dashboard</span>}
+
             </Link>
           </li>
           <li className='menu-item'>
@@ -65,6 +79,13 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
               {isSidebarOpen && <span>Public Dreams</span>}
             </Link>
           </li>
+
+          <li className='menu-item'>
+            <Link to='/logout'>
+            <MeetingRoomIcon /> <span>Logout</span>
+            </Link>
+          </li>
+
         </ul>
         <div className='sidebar-footer'>
           <ul>
