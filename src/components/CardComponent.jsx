@@ -28,7 +28,7 @@ const Card = ({
 
   const handleCancel = () => {
     setIsEditing(false)
-    setEditedData({ title, subtitle, description }) // Reset edits
+    setEditedData({ title, subtitle, description })
   }
 
   const handleSave = async () => {
@@ -72,19 +72,22 @@ const Card = ({
           </>
         ) : (
           <>
-            {title && <h3 className='card-title'>{title}</h3>}
+            {' '}
+            <div className='card-actions'>
+              <EditIcon className='edit-icon' onClick={handleEdit} />
+              <DeleteIcon className='delete-icon' onClick={handleDelete} />
+            </div>
+            {title && <h3 className='card-title'>{editedData.title}</h3>}
             {emotions && emotions.length > 0 && (
               <p className='card-emotions'>Emotions: {emotions.join(', ')}</p>
             )}
             {tags && tags.length > 0 && (
               <p className='card-tags'>Tags: {tags.join(', ')}</p>
             )}
-            {subtitle && <p className='card-subtitle'>{subtitle}</p>}
-            {description && <p className='card-description'>{description}</p>}
-            <div className='card-actions'>
-              <EditIcon className='edit-icon' onClick={handleEdit} />
-              <DeleteIcon className='delete-icon' onClick={handleDelete} />
-            </div>
+            {subtitle && <p className='card-subtitle'>{editedData.subtitle}</p>}
+            {description && (
+              <p className='card-description'>{editedData.description}</p>
+            )}
           </>
         )}
       </div>
