@@ -20,7 +20,6 @@ import {
 import { Bar, Line, Pie } from 'react-chartjs-2'
 import { Colors } from 'chart.js'
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -44,6 +43,8 @@ const Analysis = () => {
   const [error, setError] = useState(null)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const [showEmotionBarChart, setShowEmotionBarChart] = useState(true)
+  const [showTagBarChart, setShowTagBarChart] = useState(true)
 
   const getNameByIdOrDirectName = (id, list) => {
     if (typeof id === 'string' && list.find(el => el.name === id)) {
@@ -54,7 +55,7 @@ const Analysis = () => {
     return item ? item.name : id // Return name if found, otherwise fallback to id
   }
 
-  const aggregateTrendData = (data) => {
+  const aggregateTrendData = data => {
     // Create a map to store aggregated counts by month and year
     const aggregated = {}
 
@@ -70,7 +71,6 @@ const Analysis = () => {
       }
     })
 
-    // Convert the aggregated object into an array suitable for charting
     return Object.keys(aggregated).map(key => {
       const [year, month] = key.split('-')
       return {
@@ -91,7 +91,6 @@ const Analysis = () => {
             fetchTrendsAnalysis()
           ])
 
-        // Aggregate the trend data
         const aggregatedTrendData = aggregateTrendData(trendsAnalysis)
 
         const mappedEmotions = emotionsAnalysis.map(item => ({
@@ -106,7 +105,6 @@ const Analysis = () => {
         setEmotionData(mappedEmotions)
         setTagData(mappedTags)
         setTrendData(aggregatedTrendData)
-
       } catch (err) {
         console.error('Error fetching analysis data:', err)
         setError('Failed to fetch analysis data.')
@@ -148,7 +146,8 @@ const Analysis = () => {
         data: tagData.map(item => item.count),
         backgroundColor: tagData.map(
           (_, index) =>
-            `rgba(${50 + index * 20}, ${100 + index * 15}, ${200 - index * 10
+            `rgba(${50 + index * 20}, ${100 + index * 15}, ${
+              200 - index * 10
             }, 0.6)`
         ),
         borderWidth: 1
@@ -163,7 +162,8 @@ const Analysis = () => {
         data: emotionData.map(item => item.count),
         backgroundColor: emotionData.map(
           (_, index) =>
-            `rgba(${200 - index * 10}, ${50 + index * 20}, ${100 + index * 15
+            `rgba(${200 - index * 10}, ${50 + index * 20}, ${
+              100 + index * 15
             }, 0.6)`
         ),
         borderWidth: 1
@@ -215,22 +215,21 @@ const Analysis = () => {
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false, // Allows custom height/width
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'top'
       },
       title: {
         display: true,
-        text: '',
-      },
-    },
+        text: ''
+      }
+    }
   }
 
   return (
     <div>
       <h1>Dream Analysis</h1>
-
       <div>
         <label>
           Start Date:
@@ -249,36 +248,59 @@ const Analysis = () => {
           />
         </label>
       </div>
-
-      <div className="chart-container">
-        <h2>Dreams per Emotion</h2>
-
-        <div className="chart-item">
-          <Bar data={emotionChartData} options={chartOptions} key="emotionsChart" />
-        </div>
-
-        <div className="chart-item">
-          <h2>Dreams per Tag</h2>
-          <Pie data={pieTagData} options={chartOptions} />
-        </div>
+      <h2>Dreams per Emotion</h2>
+      <label className='toggle-switch'>
+        <input
+          type='checkbox'
+          checked={showEmotionBarChart}
+          onChange={() => setShowEmotionBarChart(prev => !prev)}
+        />
+        <span className='slider' />
+      </label>
+      <span>{showEmotionBarChart ? 'Bar Chart' : 'Pie Chart'}</span>
+      <div className='chart-container'>
+        {showEmotionBarChart ? (
+          <div className='chart-item bar-chart'>
+            <Bar
+              data={emotionChartData}
+              options={chartOptions}
+              key='emotionsChart'
+            />
+          </div>
+        ) : (
+          <div className='pie-chart chart-item'>
+            <Pie data={pieEmotionData} options={chartOptions} />
+          </div>
+        )}
       </div>
-
-      <div className="chart-container">
-        <h2>Dreams per Tag</h2>
-        <div className="chart-item">
-          <Bar data={tagChartData} options={chartOptions} key="tagsChart" />
-        </div>
-
-        <div className="chart-item">
-          <h2>Dreams per Emotion</h2>
-          <Pie data={pieEmotionData} options={chartOptions} />
-        </div>
+      <h2>Dreams per Tag</h2>{' '}
+      <label className='toggle-switch'>
+        <input
+          type='checkbox'
+          checked={showTagBarChart}
+          onChange={() => setShowTagBarChart(prev => !prev)}
+        />
+        <span className='slider' />
+      </label>
+      <div className='chart-container'>
+        {showTagBarChart ? (
+          <div className='chart-item bar-chart'>
+            <Bar data={tagChartData} options={chartOptions} key='tagsChart' />
+          </div>
+        ) : (
+          <div className='chart-item pie-chart'>
+            <Pie data={pieTagData} options={chartOptions} />
+          </div>
+        )}
       </div>
-
-      <div className="chart-container">
+      <div className='chart-container'>
         <h2>Dream Trends Over Time</h2>
-        <div className="chart-item">
-          <Line data={trendChartData} options={chartOptions} key="trendsChart" />
+        <div className='chart-item'>
+          <Line
+            data={trendChartData}
+            options={chartOptions}
+            key='trendsChart'
+          />
         </div>
       </div>
     </div>
@@ -286,4 +308,3 @@ const Analysis = () => {
 }
 
 export default Analysis
-

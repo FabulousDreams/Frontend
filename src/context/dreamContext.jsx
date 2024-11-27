@@ -101,7 +101,7 @@ export const DreamProvider = ({ children }) => {
 
   const createDream = async dreamData => {
     setError(null)
-
+    console.log(dreamData)
     try {
       const { data } = await axios.post(
         'http://localhost:5005/api/dreams',
@@ -110,7 +110,7 @@ export const DreamProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${token}` }
         }
       )
-      setMyDreams(prevDreams => [...prevDreams, data.dream]) // to add the new dream to "myDreams"
+      setMyDreams(prevDreams => [data.dream, ...prevDreams])
     } catch (err) {
       setError('Failed to create dream.')
       console.error('Error creating dream:', err)

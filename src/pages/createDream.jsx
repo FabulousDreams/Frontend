@@ -35,20 +35,10 @@ const CreateDream = () => {
       }))
     }
   }
-  const handleDropdownChange = (e, dataSource) => {
-    const { name } = e.target
-    const selectedOptions = Array.from(e.target.selectedOptions, option => {
-      return dataSource.find(item => item._id === option.value)
-    })
 
-    setForm(prevForm => ({
-      ...prevForm,
-      [name]: selectedOptions
-    }))
-  }
   const handleSubmit = async e => {
     e.preventDefault()
-
+    console.log(form)
     const dreamData = {
       ...form,
       userId: user._id
