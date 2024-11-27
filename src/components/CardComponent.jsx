@@ -36,7 +36,7 @@ const Card = ({
         )}
 
         <div className='card-content'>
-          <h3 className='card-title'>{title}</h3>
+          {title && <h3 className='card-title'>{title}</h3>}
           {/* Display emotions */}
           {emotions && emotions.length > 0 && (
             <p className='card-emotions'>Emotions: {emotions.join(', ')}</p>
