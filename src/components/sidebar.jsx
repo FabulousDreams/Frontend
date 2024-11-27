@@ -6,6 +6,8 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
+
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false)
@@ -23,7 +25,7 @@ const Sidebar = () => {
         <ul className='sidebar-list'>
           <li className='menu-item'>
             <Link to='/dashboard'>
-              <NightsStayIcon /> <span>Dashboard</span>
+              <NightsStayIcon /> <span>Dreams Dashboard</span>
             </Link>
           </li>
 
@@ -57,6 +59,13 @@ const Sidebar = () => {
               <PublicIcon /> <span>Public Dreams</span>
             </Link>
           </li>
+
+          <li className='menu-item'>
+            <Link to='/logout'>
+            <MeetingRoomIcon /> <span>Logout</span>
+            </Link>
+          </li>
+
         </ul>
       </div>
     </>
