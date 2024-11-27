@@ -10,13 +10,9 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import LogoutIcon from '@mui/icons-material/Logout'
-const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const { user, logout } = useAuthContext()
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
 
   return (
     <>
