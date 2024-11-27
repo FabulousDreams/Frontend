@@ -80,7 +80,7 @@ const Login = () => {
                   Create an account?
                   <p onClick={Signup} className='underline'>
                     Click here
-                  </p>{' '}
+                  </p>
                 </p>
                 <p>{feedBackLogin}</p>
               </div>

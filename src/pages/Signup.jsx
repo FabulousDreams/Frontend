@@ -17,7 +17,10 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(null)
-
+  const [active, setActive] = useState(true)
+  const Login = () => {
+    setActive(!active)
+  }
   const handleInputChange = e => {
     const { name, value } = e.target
     if (name === 'username') setUserName(value)
@@ -109,6 +112,12 @@ const SignUp = () => {
             />
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
+            <p>
+              Already have account?
+              <p onClick={Login} className='underline'>
+                Click here
+              </p>
+            </p>
           </div>
         </form>
         <div className='image-firm'>
