@@ -1,72 +1,85 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useAuthContext } from '../context/authContext'
 import NightsStayIcon from '@mui/icons-material/NightsStay'
 import PublicIcon from '@mui/icons-material/Public'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
-
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+import LogoutIcon from '@mui/icons-material/Logout'
 const Sidebar = () => {
-  const [openSidebar, setOpenSidebar] = useState(false)
-  const [isOpen, setIsopen] = useState(false)
-  const ToggleSidebar = () => {
-    setIsopen(!isOpen)
-    console.log(isOpen)
-  }
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const { user, logout } = useAuthContext()
 
-  // 1-function to handle sidebar at mobile size
-  // 2.having logo or image for clicking on it
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
 
   return (
     <>
-      <div className='responsive-nav'>
-        {/* <button className='sidebar-toggle-btn'> */}
-        {/* <img src={wlogo} className='logo-image' alt='Logo' /> */}
-        {/* </button> */}
-      </div>
-      <div className={`sidebar  open closed ${isOpen ? 'toggle-sidebar' : ''}`}>
-        <button className='btn' onClick={ToggleSidebar}>
-          toggle
-        </button>
-        <ul className='sidebar-list'>
-          <li className={`menu-item ${isOpen ? '' : 'hide'}`}>
+      <div className='mobile-nav'></div>
+
+      <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+        <div className='sidebar-header'>
+          <button className='sidebar-toggle-btn' onClick={toggleSidebar}>
+            {isSidebarOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+          </button>
+        </div>
+        <ul
+          className={` ${
+            isSidebarOpen ? 'sidebar-list-open' : 'sidebar-list-close'
+          }`}
+        >
+          <li className='menu-item'>
             <Link to='/dashboard'>
-              <NightsStayIcon /> <span>Dashboard</span>
+              <NightsStayIcon />
+              {isSidebarOpen && <span>Dashboard</span>}
             </Link>
           </li>
-
           <li className='menu-item'>
             <Link to='/mine-dreams'>
-              <AutoAwesomeIcon /> <span>My Dreams</span>
+              <AutoAwesomeIcon />
+              {isSidebarOpen && <span>My Dreams</span>}
             </Link>
           </li>
-
           <li className='menu-item'>
             <Link to='/analysis'>
-              <AutoGraphIcon /> <span>Analytics</span>
+              <AutoGraphIcon />
+              {isSidebarOpen && <span>Analytics</span>}
             </Link>
           </li>
-
           <li className='menu-item'>
             <Link to='/add-dream'>
-              <AddBoxIcon /> <span>Add New Dream</span>
+              <AddBoxIcon />
+              {isSidebarOpen && <span>Add New Dream</span>}
             </Link>
           </li>
-
-          <li className='menu-item responsive'>
+          <li className='menu-item'>
             <Link to='/profile'>
               <AccountCircleIcon />
-              <span>My Profile</span>
+              {isSidebarOpen && <span>My Profile</span>}
             </Link>
           </li>
-
           <li className='menu-item'>
             <Link to='/public-dreams'>
-              <PublicIcon /> <span>Public Dreams</span>
+              <PublicIcon />
+              {isSidebarOpen && <span>Public Dreams</span>}
             </Link>
           </li>
         </ul>
+        <div className='sidebar-footer'>
+          <ul>
+            <li className='menu-item' onClick={logout}>
+              <Link to='/'>
+                <LogoutIcon />
+                {isSidebarOpen && <span>Logout</span>}
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   )
