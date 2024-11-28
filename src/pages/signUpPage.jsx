@@ -31,10 +31,15 @@ const SignUpPage = () => {
   }
 
   const handleSubmit = async e => {
+    e.preventDefault()
     setError(null)
     setSuccess(null)
 
-    // see if passwords match
+    if (!userName || !email || !password || !confirmPassword) {
+      setError('All fields are required!')
+      return
+    }
+
     if (password !== confirmPassword) {
       setError('Passwords do not match!')
       return
@@ -44,8 +49,13 @@ const SignUpPage = () => {
       username: userName,
       password
     }
-    e.preventDefault()
-    await signUp(userData)
+
+    try {
+      await signUp(userData)
+      setSuccess('Account created successfully!')
+    } catch (err) {
+      setError(err.message || 'Failed to create account.')
+    }
   }
 
   return (
