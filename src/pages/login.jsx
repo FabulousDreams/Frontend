@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
-import { useNavigate } from 'react-router-dom'
+
 import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg'
 import SignUpPage from './signUpPage'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import passwordIcon from '../assets/images/password.svg'
 import emailIcon from '../assets/images/email.svg'
-
+import hideIcon from '../assets/images/visibility_off.svg'
+import showIcon from '../assets/images/visibility_on.svg'
 const Login = () => {
   const { login, feedBackLogin } = useAuthContext()
-  const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false)
+
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -61,12 +63,18 @@ const Login = () => {
                   // label='Password'
                 >
                   <input
-                    type='password'
+                    type={`${showPassword ? 'text' : 'password'}`}
                     id='password'
                     name='password'
                     required
                     value={form.password}
                     onChange={handleInputChange}
+                  />
+                  <img
+                    src={showPassword ? showIcon : hideIcon}
+                    alt={showPassword ? 'Show password' : 'Hide password'}
+                    onClick={() => setShowPassword(!showPassword)}
+                    className='passwordToggleIcon'
                   />
                 </InputField>
 
