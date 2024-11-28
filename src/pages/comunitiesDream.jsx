@@ -58,9 +58,9 @@ const PublicDreams = () => {
 
   return (
     <div>
-      <h1>public Dreams</h1>
+      <h3>public Dreams</h3>
 
-      <h2>Filter by Tags:</h2>
+      <div className='subtitle1'>Filter by Tags:</div>
       <div className='tag-filter'>
         {tags.map(tag => (
           <DreamButton
@@ -76,7 +76,7 @@ const PublicDreams = () => {
         ))}
       </div>
 
-      <h2>Filter by Emotions</h2>
+      <div className='subtitle1'>Filter by Emotions</div>
       <div className='emotion-filter '>
         {emotions.map(emotion => (
           <DreamButton
@@ -94,7 +94,9 @@ const PublicDreams = () => {
         ))}
       </div>
 
-      <button onClick={applyFilters}>Apply Filters</button>
+      <button onClick={applyFilters} className='filter caption'>
+        Apply Filters
+      </button>
       {publicDreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])
         const tagNames = getTagNames(dream.tags || [])

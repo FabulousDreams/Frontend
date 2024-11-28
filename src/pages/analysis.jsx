@@ -229,8 +229,8 @@ const Analysis = () => {
 
   return (
     <div>
-      <h1>Dream Analysis</h1>
-      <h2>Dreams per Emotion</h2>
+      <h3>Dream Analysis</h3>
+      <div className='subtitle1'>Dreams per Emotion</div>
       <label className='toggle-switch'>
         <input
           type='checkbox'
@@ -255,7 +255,7 @@ const Analysis = () => {
           </div>
         )}
       </div>
-      <h2>Dreams per Tag</h2>{' '}
+      <div className='subtitle1'>Dreams per Tag</div>{' '}
       <label className='toggle-switch'>
         <input
           type='checkbox'
@@ -275,7 +275,7 @@ const Analysis = () => {
           </div>
         )}
       </div>
-      <h2>Dream Trends Over Time</h2>
+      <div className='subtitle1'>Dream Trends Over Time</div>
       <div className='chart-container'>
         <div className='chart-item'>
           <Line

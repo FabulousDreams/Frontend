@@ -90,7 +90,7 @@ const CreateDream = () => {
   return (
     <div id='create-dream'>
       <form onSubmit={handleSubmit} className='create-dream-form'>
-        <h2>Create a New Dream</h2>
+        <h3>Create a New Dream</h3>
 
         {confirmation && (
           <Alert severity='success' className='confirmation-message'>

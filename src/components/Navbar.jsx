@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
 import { Avatar } from '@mui/material'
 
-
 const NavbarData = [
-
-
   {
     title: 'Login',
     icon: null,
@@ -20,7 +17,7 @@ const NavbarData = [
   }
 ]
 
-function Navbar() {
+function Navbar () {
   const { user, logout } = useAuthContext()
 
   const filteredNavbarData = NavbarData.filter(item => {
@@ -33,10 +30,13 @@ function Navbar() {
 
   return (
     <nav>
-      <div className="navbar-logo">
-        <img src="src\assets\images\Logo.png" alt="DreamCatcher Logo" />
+      <div className='navbar-logo'>
+        <Link to='/'>
+          {' '}
+          <img src='src\assets\images\Logo.png' alt='DreamCatcher Logo' />
+        </Link>
       </div>
-      
+
       <ul className='navbar-links'>
         {filteredNavbarData.map((item, index) => (
           <li key={index} className='navbar-item'>
@@ -56,15 +56,15 @@ function Navbar() {
       </ul>
 
       {user && (
-        <div className="navbar-user-info">
-          <Link to="/profile">
+        <Link to='/profile'>
+          <div className='navbar-user-info'>
+            <span className='navbar-username'>{user.username}</span>
             <Avatar
               src={user.profileImageUrl || 'https://via.placeholder.com/150'}
-              alt="User Avatar"
+              alt='User Avatar'
             />
-          </Link>
-          <span className="navbar-username">{user.username}</span>
-        </div>
+          </div>
+        </Link>
       )}
     </nav>
   )

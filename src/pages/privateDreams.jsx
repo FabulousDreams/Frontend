@@ -56,8 +56,8 @@ const YourDreams = () => {
 
   return (
     <div>
-      <h1>Your Dreams</h1>
-      <h2>Filter by Tags:</h2>
+      <h3>Your Dreams</h3>
+      <div className='subtitle1'>Filter by Tags:</div>
       <div className='tag-filter'>
         {tags.map(tag => (
           <DreamButton
@@ -73,7 +73,7 @@ const YourDreams = () => {
         ))}
       </div>
       <br />
-      <h2>Filter by Emotions</h2>
+      <div className='subtitle1'>Filter by Emotions</div>
       <div className='emotion-filter '>
         {emotions.map(emotion => (
           <DreamButton
@@ -108,6 +108,7 @@ const YourDreams = () => {
                 emotions={emotionNames}
                 tags={tagNames}
                 imageUrl={dream.imageUrl}
+                editMood={false}
               />
             </Link>
           </div>

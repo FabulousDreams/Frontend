@@ -40,7 +40,7 @@ const LandingPage = () => {
       </section>
 
       <section className='cta-section'>
-        <h2>Ready to Uncover Your Dreams?</h2>
+        <h5>Ready to Uncover Your Dreams?</h5>
         <button className='cta-button' onClick={handleRedirect}>
           Get Started Now
         </button>

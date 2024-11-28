@@ -6,6 +6,15 @@ import SaveIcon from '@mui/icons-material/Save'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useDreamContext } from '../context/dreamContext'
 import imagBasic from '../assets/images/basic.png'
+import {
+  TextField,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Autocomplete,
+  Alert
+} from '@mui/material'
 const Card = ({
   id,
   title,
@@ -13,7 +22,8 @@ const Card = ({
   description,
   emotions,
   tags,
-  imageUrl
+  imageUrl,
+  editMood
 }) => {
   const { updateDream, deleteDream } = useDreamContext()
   const [isEditing, setIsEditing] = useState(false)
@@ -55,19 +65,34 @@ const Card = ({
       <div className='card-content'>
         {isEditing ? (
           <>
-            <input
-              type='text'
+            {emotions && emotions.length > 0 && (
+              <p className=' bridge '>Emotions: {emotions.join(', ')}</p>
+            )}
+            {tags && tags.length > 0 && (
+              <p className=' bridge'>Tags: {tags.join(', ')}</p>
+            )}
+            <TextField
+              label='Title'
               name='title'
               value={editedData.title}
               onChange={handleInputChange}
-              className='edit-input'
+              required
+              fullWidth
+              margin='normal'
             />
-            <textarea
+
+            <TextField
+              label='Description'
               name='description'
               value={editedData.description}
               onChange={handleInputChange}
-              className='edit-textarea'
+              required
+              fullWidth
+              multiline
+              rows={4}
+              margin='normal'
             />
+
             <div className='card-actions'>
               <SaveIcon className='save-icon' onClick={handleSave} />
               <CancelIcon className='cancel-icon' onClick={handleCancel} />
@@ -75,10 +100,13 @@ const Card = ({
           </>
         ) : (
           <>
-            {' '}
             <div className='card-actions'>
-              <EditIcon className='edit-icon' onClick={handleEdit} />
-              <DeleteIcon className='delete-icon' onClick={handleDelete} />
+              {editMood && (
+                <EditIcon className='edit-icon' onClick={handleEdit} />
+              )}
+              {editMood && (
+                <DeleteIcon className='delete-icon' onClick={handleDelete} />
+              )}
             </div>
             {title && (
               <h3 className='card-title subtitle1'>{editedData.title}</h3>

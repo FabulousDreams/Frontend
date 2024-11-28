@@ -4,7 +4,15 @@ import AddnewComment from '../components/createComment'
 import CommentList from '../components/commentList'
 import { useDreamContext } from '../context/dreamContext'
 import Card from '../components/CardComponent'
-
+import {
+  TextField,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Autocomplete,
+  Alert
+} from '@mui/material'
 const DreamDetails = () => {
   const { dreamId } = useParams()
   const {
@@ -72,11 +80,13 @@ const DreamDetails = () => {
         <>
           {editingId === specificDream._id ? (
             <div>
-              <input
-                type='text'
+              <TextField
+                label='Title'
                 name='title'
                 value={editedDream.title}
                 onChange={handleInputChange}
+                fullWidth
+                margin='normal'
               />
               <textarea
                 name='description'
@@ -97,6 +107,7 @@ const DreamDetails = () => {
               imageUrl={specificDream.imageUrl}
               onEditItem={(id, updatedData) => updateDream(id, updatedData)}
               onDeleteItem={handleDelete}
+              editMood={true}
             />
           )}
           <CommentList
