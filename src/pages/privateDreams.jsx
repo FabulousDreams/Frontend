@@ -2,18 +2,34 @@ import { useEffect, useState } from 'react'
 import { useDreamContext } from '../context/dreamContext'
 import Card from '../components/CardComponent'
 import { Link } from 'react-router-dom'
+import SearchBar from '../components/SearchBar'
+
+
+
 const YourDreams = () => {
   const { myDreams, updateDream, deleteDream, tags, emotions } =
     useDreamContext()
 
-  const [dreams, setDreams] = useState([])
-  const [editingId, setEditingId] = useState(null)
-  const [editedDream, setEditedDream] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [dreams, setDreams] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [editedDream, setEditedDream] = useState({});
+  const [loading, setLoading] = useState(true);
+
+
   useEffect(() => {
     setDreams(myDreams)
     setLoading(false)
   }, [myDreams])
+
+  const handleSearch = (query) => {
+    const filteredDreams = myDreams.filter((dream) =>
+      dream.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setDreams(filteredDreams);
+  };
+
+
+
   const getEmotionNames = emotionIds => {
     return emotionIds.map(id => {
       const emotion = emotions.find(emotion => emotion._id === id)
@@ -50,6 +66,7 @@ const YourDreams = () => {
   return (
     <div>
       <h1>Your Dreams</h1>
+      <SearchBar onSearch={handleSearch} />
 
       {dreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])
