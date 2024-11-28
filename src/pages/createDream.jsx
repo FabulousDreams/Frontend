@@ -3,6 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
 import { useDreamContext } from '../context/dreamContext'
 import InputField from '../components/common/inputField'
+import {
+  TextField,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Autocomplete,
+  Alert
+} from '@mui/material'
+
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { DatePicker } from '@mui/x-date-pickers'
 
 const CreateDream = () => {
   const { user } = useAuthContext()
@@ -18,23 +31,21 @@ const CreateDream = () => {
     imageUrl: ''
   })
   const [waitingForImageUrl, setWaitingForImageUrl] = useState(false)
-
+  const [confirmation, setConfirmation] = useState(false)
   const navigate = useNavigate()
 
   const handleChange = e => {
-    const { name, value, type, checked } = e.target
-
-    if (type === 'checkbox') {
-      setForm(prevForm => ({
-        ...prevForm,
-        [name]: checked
-      }))
-    } else {
-      setForm(prevForm => ({
-        ...prevForm,
-        [name]: value
-      }))
-    }
+    const { name, value } = e.target
+    setForm(prevForm => ({
+      ...prevForm,
+      [name]: value
+    }))
+  }
+  const handlePublicChange = e => {
+    setForm(prevForm => ({
+      ...prevForm,
+      isPublic: e.target.value === 'true'
+    }))
   }
   const handleImageUpload = async e => {
     const file = e.target.files[0]
@@ -56,10 +67,21 @@ const CreateDream = () => {
       ...form,
       userId: user._id
     }
-    console.log(dreamData)
+
     try {
       await createDream(dreamData)
-      // navigate('/mine-dreams')
+      setConfirmation(true)
+      setTimeout(() => setConfirmation(false), 3000)
+      setConfirmation(true)
+      setForm({
+        title: '',
+        description: '',
+        date: '',
+        emotions: [],
+        tags: [],
+        isPublic: false,
+        imageUrl: ''
+      })
     } catch (error) {
       console.error('Error creating a new dream', error)
     }
@@ -67,56 +89,107 @@ const CreateDream = () => {
 
   return (
     <div id='create-dream'>
-      <form onSubmit={handleSubmit}>
-        <div className='dream-data'>
-          <div className='text-area'>
-            <InputField className='inputField mediumInput' label='Subject'>
-              <input
-                type='text'
-                name='title'
-                value={form.title}
-                onChange={handleChange}
-                required
-              />
-            </InputField>
-            <div>
-              <InputField className='inputField mediumInput' label='Date:'>
-                <input
-                  type='date'
-                  name='date'
-                  value={form.date}
-                  onChange={handleChange}
-                  required
-                />
-              </InputField>
-            </div>
-            <InputField className='inputField mediumInput' label='Description:'>
-              <textarea
-                name='description'
-                value={form.description}
-                onChange={handleChange}
-                required
-              />
-            </InputField>
-            <div>
-              <label>Public:</label>
-              <input
-                type='checkbox'
-                name='isPublic'
-                checked={form.isPublic}
-                onChange={handleChange}
-              />
-            </div>
-            <InputField className='inputField mediumInput' label='Image Upload'>
-              <input
-                type='file'
-                accept='image/*'
-                onChange={handleImageUpload}
-                disabled={waitingForImageUrl}
-              />
-              {waitingForImageUrl && <p>Uploading...</p>}
-            </InputField>
-          </div>
+      <form onSubmit={handleSubmit} className='create-dream-form'>
+        <h2>Create a New Dream</h2>
+
+        {confirmation && (
+          <Alert severity='success' className='confirmation-message'>
+            Dream created successfully!
+          </Alert>
+        )}
+
+        <div>
+          <TextField
+            label='Title'
+            name='title'
+            value={form.title}
+            onChange={handleChange}
+            required
+            fullWidth
+            margin='normal'
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label='Date'
+              value={form.date}
+              onChange={newDate =>
+                setForm(prevForm => ({
+                  ...prevForm,
+                  date: newDate
+                }))
+              }
+              renderInput={params => (
+                <TextField {...params} fullWidth margin='normal' />
+              )}
+            />
+          </LocalizationProvider>
+          <TextField
+            label='Description'
+            name='description'
+            value={form.description}
+            onChange={handleChange}
+            required
+            fullWidth
+            multiline
+            rows={4}
+            margin='normal'
+          />
+          <Autocomplete
+            multiple
+            options={emotions}
+            getOptionLabel={option => option.name}
+            value={form.emotions}
+            onChange={(e, newValue) =>
+              setForm(prevForm => ({
+                ...prevForm,
+                emotions: newValue
+              }))
+            }
+            renderInput={params => (
+              <TextField {...params} label='Emotions' margin='normal' />
+            )}
+          />
+          <Autocomplete
+            multiple
+            options={tags}
+            getOptionLabel={option => option.name}
+            value={form.tags}
+            onChange={(e, newValue) =>
+              setForm(prevForm => ({
+                ...prevForm,
+                tags: newValue
+              }))
+            }
+            renderInput={params => (
+              <TextField {...params} label='Tags' margin='normal' />
+            )}
+          />
+          <RadioGroup
+            row
+            value={form.isPublic.toString()}
+            onChange={handlePublicChange}
+            className='public-choice'
+          >
+            <FormControlLabel
+              value='false'
+              control={<Radio />}
+              label='Private Dream'
+            />
+            <FormControlLabel
+              value='true'
+              control={<Radio />}
+              label='Public Dream'
+            />
+          </RadioGroup>
+          <InputField className='inputField mediumInput' label='Image Upload'>
+            <input
+              type='file'
+              accept='image/*'
+              onChange={handleImageUpload}
+              disabled={waitingForImageUrl}
+            />
+            {waitingForImageUrl && <p>Uploading...</p>}
+          </InputField>
           {form.imageUrl && (
             <div>
               <h4>Image Preview:</h4>
@@ -127,67 +200,16 @@ const CreateDream = () => {
               />
             </div>
           )}
-          <div className='checkbox-area'>
-            <div className='emotion'>
-              <label>Emotions:</label>
-              {emotions.map(emotion => (
-                <div key={emotion._id}>
-                  <label className='checkbox-container'>
-                    <input
-                      type='checkbox'
-                      name='emotions'
-                      value={emotion._id}
-                      checked={form.emotions.some(e => e._id === emotion._id)}
-                      onChange={e => {
-                        const { value, checked } = e.target
-                        setForm(prevForm => ({
-                          ...prevForm,
-                          emotions: checked
-                            ? [...prevForm.emotions, emotion]
-                            : prevForm.emotions.filter(e => e._id !== value)
-                        }))
-                      }}
-                    />
-                    <span className='checkmark'></span>
-                    {emotion.name}
-                  </label>
-                </div>
-              ))}
-            </div>
-
-            <hr className='solid' />
-            <div className='emotion'>
-              <label>Tags:</label>
-              {tags.map(tag => (
-                <div key={tag._id}>
-                  <label className='checkbox-container'>
-                    <input
-                      type='checkbox'
-                      name='tags'
-                      value={tag._id}
-                      checked={form.tags.some(t => t._id === tag._id)}
-                      onChange={e => {
-                        const { value, checked } = e.target
-                        setForm(prevForm => ({
-                          ...prevForm,
-                          tags: checked
-                            ? [...prevForm.tags, tag]
-                            : prevForm.tags.filter(t => t._id !== value)
-                        }))
-                      }}
-                    />
-                    <span className='checkmark'></span>
-
-                    {tag.name}
-                  </label>{' '}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
-        <button type='submit' disabled={waitingForImageUrl}>
-          {waitingForImageUrl ? 'Uploading...' : 'Add Dream'}
-        </button>
+
+        <Button
+          type='submit'
+          variant='contained'
+          color='primary'
+          className='create-dream-button'
+        >
+          {waitingForImageUrl ? 'Uploading...' : '  Create New Dream'}
+        </Button>
       </form>
     </div>
   )
