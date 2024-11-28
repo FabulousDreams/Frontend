@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
   const [feedBackLogin, setFeedBackLogin] = useState('')
+
   const navigate = useNavigate()
   useEffect(() => {
     if (token) {
@@ -33,12 +34,14 @@ export const AuthProvider = ({ children }) => {
       setToken(authToken)
       setUser(userData)
 
-      localStorage.setItem('authToken', authToken)
+      navigate('/dashboard')
       localStorage.setItem('user', JSON.stringify(userData))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
+      console.log('authToken', authToken)
     } catch (error) {
       console.error('Login failed:', error)
+      console.log(error)
       setFeedBackLogin('user not found.')
     }
   }
