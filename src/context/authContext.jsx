@@ -35,13 +35,13 @@ export const AuthProvider = ({ children }) => {
       setToken(authToken)
       setUser(userData)
 
-      navigate('/dashboard')
+      navigate('/mine-dreams')
       localStorage.setItem('user', JSON.stringify(userData))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
     } catch (error) {
       console.error('Login failed:', error)
-      console.log(error)
+      console.log('login error', error)
       setFeedBackLogin('user not found.')
     }
   }
