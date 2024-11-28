@@ -3,17 +3,20 @@ import { useDreamContext } from '../context/dreamContext'
 import Card from '../components/CardComponent'
 import { Link } from 'react-router-dom'
 const YourDreams = () => {
-  const { myDreams, updateDream, deleteDream, tags, emotions } =
-    useDreamContext()
+  const { myDreams, tags, emotions, fetchMyDreams } = useDreamContext()
 
-  const [dreams, setDreams] = useState([])
-  const [editingId, setEditingId] = useState(null)
-  const [editedDream, setEditedDream] = useState({})
+  const [selectedTags, setSelectedTags] = useState([])
+  const [selectedEmotions, setSelectedEmotions] = useState([])
+
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    setDreams(myDreams)
-    setLoading(false)
-  }, [myDreams])
+    const fetchData = async () => {
+      await fetchMyDreams()
+      setLoading(false)
+    }
+    fetchData()
+    console.log('My Dreams:', myDreams)
+  }, [])
   const getEmotionNames = emotionIds => {
     return emotionIds.map(id => {
       const emotion = emotions.find(emotion => emotion._id === id)
@@ -27,21 +30,26 @@ const YourDreams = () => {
       return tag ? tag.name : 'Unknown Tag'
     })
   }
-  const handleEditClick = dream => {
-    setEditingId(dream._id)
-    setEditedDream(dream)
-  }
-  const handleDelete = async dreamId => {
-    await deleteDream(dreamId)
-  }
-  const handleSaveClick = async () => {
-    await updateDream(editingId, editedDream)
-    setEditingId(null)
+
+  const toggleTag = tagId => {
+    setSelectedTags(prev =>
+      prev.includes(tagId) ? prev.filter(id => id !== tagId) : [...prev, tagId]
+    )
   }
 
-  const handleInputChange = e => {
-    const { name, value } = e.target
-    setEditedDream(prev => ({ ...prev, [name]: value }))
+  const toggleEmotion = emotionId => {
+    setSelectedEmotions(prev =>
+      prev.includes(emotionId)
+        ? prev.filter(id => id !== emotionId)
+        : [...prev, emotionId]
+    )
+  }
+  const applyFilters = () => {
+    const filters = {}
+    if (selectedTags.length > 0) filters.tags = selectedTags.join(',')
+    if (selectedEmotions.length > 0)
+      filters.emotions = selectedEmotions.join(',')
+    fetchMyDreams(filters)
   }
   if (loading) {
     return <p>Loading dreams...</p>
@@ -50,8 +58,39 @@ const YourDreams = () => {
   return (
     <div>
       <h1>Your Dreams</h1>
+      <div>
+        <h2>Filter by Tags:</h2>
+        {tags.map(tag => (
+          <button
+            key={tag._id}
+            onClick={() => toggleTag(tag._id)}
+            style={{
+              backgroundColor: selectedTags.includes(tag._id) ? 'blue' : 'gray'
+            }}
+          >
+            {tag.name}
+          </button>
+        ))}
+      </div>
 
-      {dreams.map(dream => {
+      <div>
+        <h2>Filter by Emotions</h2>
+        {emotions.map(emotion => (
+          <button
+            key={emotion._id}
+            onClick={() => toggleEmotion(emotion._id)}
+            style={{
+              backgroundColor: selectedEmotions.includes(emotion._id)
+                ? 'blue'
+                : 'gray'
+            }}
+          >
+            {emotion.name}
+          </button>
+        ))}
+      </div>
+      <button onClick={applyFilters}>Apply Filters</button>
+      {myDreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])
         const tagNames = getTagNames(dream.tags || [])
 

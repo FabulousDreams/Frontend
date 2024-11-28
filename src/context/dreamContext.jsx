@@ -40,16 +40,19 @@ export const DreamProvider = ({ children }) => {
     }
   }
   // fetch user dreams
-  const fetchMyDreams = async () => {
+  const fetchMyDreams = async (filters = {}) => {
     setError(null) // Reset error state
 
     try {
+      const query = new URLSearchParams(filters).toString()
       const { data } = await axios.get(
-        'http://localhost:5005/api/dreams/mine',
+        `http://localhost:5005/api/dreams/mine?${query}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
       )
+      console.log('Fetched Dreams:', data)
+
       setMyDreams(data)
     } catch (error) {
       setError('Oh no, failed to fetch your dreams!')
@@ -59,20 +62,23 @@ export const DreamProvider = ({ children }) => {
 
   // fetch public dreams
 
-  const fetchPublicDreams = async () => {
-    setError(null)
+  const fetchPublicDreams = async (filters = {}) => {
+    setError(null) // Reset error state
 
     try {
+      // Build query string from filters
+      const query = new URLSearchParams(filters).toString()
       const { data } = await axios.get(
-        'http://localhost:5005/api/dreams/public',
+        `http://localhost:5005/api/dreams/public?${query}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
       )
-      setPublicDreams(data)
+      console.log('Fetched Public Dreams:', data) // Debugging
+      setPublicDreams(data) // Update state with fetched dreams
     } catch (error) {
       setError('Oh no, failed to fetch public dreams!')
-      console.error('Error fetching dreams:', err)
+      console.error('Error fetching public dreams:', error)
     }
   }
   const fetchDreamById = async dreamId => {
