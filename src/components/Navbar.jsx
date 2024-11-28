@@ -4,8 +4,8 @@ import { Avatar } from '@mui/material'
 
 
 const NavbarData = [
-  
- 
+
+
   {
     title: 'Login',
     icon: null,
@@ -33,7 +33,10 @@ function Navbar() {
 
   return (
     <nav>
-      <h1>DreamCatcher</h1>
+      <div className="navbar-logo">
+        <img src="src\assets\images\Logo.png" alt="DreamCatcher Logo" />
+      </div>
+      
       <ul className='navbar-links'>
         {filteredNavbarData.map((item, index) => (
           <li key={index} className='navbar-item'>

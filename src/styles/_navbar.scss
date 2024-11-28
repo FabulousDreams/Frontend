@@ -10,8 +10,11 @@ nav {
   padding: 0 1rem;
   box-sizing: border-box;
 
-  h1 {
-    color: #32213a;
+ 
+
+  .navbar-logo img {
+    height: 60px; 
+    width: auto;
   }
 
   .navbar-links {
