@@ -90,7 +90,9 @@ const YourDreams = () => {
           />
         ))}
       </div>
-      <button onClick={applyFilters}>Apply Filters</button>
+      <button onClick={applyFilters} className='filter'>
+        Apply Filters
+      </button>
       {myDreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])
         const tagNames = getTagNames(dream.tags || [])

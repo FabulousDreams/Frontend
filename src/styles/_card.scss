@@ -44,7 +44,7 @@ a {
       position: absolute;
       top: 16px;
       right: 45px;
-      color: #f7bd50;
+      color: $lavander-light;
       cursor: pointer;
       font-size: 24px;
       transition: transform 0.2s ease;
@@ -58,7 +58,7 @@ a {
       position: absolute;
       top: 16px;
       right: 16px;
-      color: #d32f2f;
+      color: $lavander-light;
       cursor: pointer;
       font-size: 24px;
       transition: transform 0.2s ease;

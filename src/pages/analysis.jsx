@@ -275,8 +275,8 @@ const Analysis = () => {
           </div>
         )}
       </div>
+      <h2>Dream Trends Over Time</h2>
       <div className='chart-container'>
-        <h2>Dream Trends Over Time</h2>
         <div className='chart-item'>
           <Line
             data={trendChartData}

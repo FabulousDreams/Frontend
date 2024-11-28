@@ -34,8 +34,9 @@
     }
 
     &:hover {
-      background-color: #bda5f1;
-      border-radius: 5px;
+      border-left: 4px solid #5a9bd4; /* Highlight border */
+      background-color: #d4e3f4; /* Optional subtle background */
+      cursor: pointer;
 
       a {
         color: #fff;
@@ -84,8 +85,9 @@
       }
 
       &:hover {
-        background-color: #bda5f1;
-        border-radius: 5px;
+        border-left: 4px solid #5a9bd4; /* Highlight border */
+        background-color: #d4e3f4; /* Optional subtle background */
+        cursor: pointer;
       }
     }
   }
