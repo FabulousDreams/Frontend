@@ -15,6 +15,40 @@ export const DreamProvider = ({ children }) => {
   const [specificDream, setSpecificDream] = useState(null)
   const [error, setError] = useState(null) // Handle errors
 
+  const uploadImage = async file => {
+    if (!file) {
+      throw new Error('No file selected.')
+    }
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append(
+      'upload_preset',
+      import.meta.env.VITE_UNSIGNED_UPLOAD_PRESET
+    )
+
+    try {
+      // Temporarily remove the Authorization header
+      const defaultHeaders = axios.defaults.headers.common.Authorization
+      delete axios.defaults.headers.common.Authorization
+
+      const { data } = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_NAME
+        }/upload`,
+        formData
+      )
+
+      // Restore the Authorization header
+      axios.defaults.headers.common.Authorization = defaultHeaders
+
+      return data.secure_url
+    } catch (error) {
+      console.error('Image upload failed:', error)
+      throw new Error('Failed to upload image.')
+    }
+  }
+
   const fetchTags = async () => {
     setError(null)
     try {
@@ -195,7 +229,8 @@ export const DreamProvider = ({ children }) => {
         deleteDream,
         tags,
         emotions,
-        error
+        error,
+        uploadImage
       }}
     >
       {children}

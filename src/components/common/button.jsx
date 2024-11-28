@@ -23,12 +23,14 @@ const DreamButton = ({
       // selected: selected,
       // deselected: !selected
     },
-    className
+    className,
+    { pointer: enable, not_allowed: !enable }
   )
 
   return (
     <div
-      className={`${buttonClasses} ${enable ? 'pointer' : 'not_allowed'}`}
+      className={`${buttonClasses} 
+      // ${enable ? 'pointer' : 'not_allowed'}`}
       onClick={enable ? onClick : undefined}
     >
       {options ? (

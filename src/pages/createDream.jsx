@@ -6,7 +6,7 @@ import InputField from '../components/common/inputField'
 
 const CreateDream = () => {
   const { user } = useAuthContext()
-  const { tags, emotions, createDream, error } = useDreamContext()
+  const { tags, emotions, createDream, error, uploadImage } = useDreamContext()
 
   const [form, setForm] = useState({
     title: '',
@@ -17,6 +17,7 @@ const CreateDream = () => {
     isPublic: false,
     imageUrl: ''
   })
+  const [waitingForImageUrl, setWaitingForImageUrl] = useState(false)
 
   const navigate = useNavigate()
 
@@ -35,15 +36,27 @@ const CreateDream = () => {
       }))
     }
   }
+  const handleImageUpload = async e => {
+    const file = e.target.files[0]
 
+    setWaitingForImageUrl(true)
+    try {
+      const imageUrl = await uploadImage(file)
+      setForm(prevForm => ({ ...prevForm, imageUrl }))
+    } catch (error) {
+      console.error(error.message)
+    } finally {
+      setWaitingForImageUrl(false)
+    }
+  }
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(form)
+
     const dreamData = {
       ...form,
       userId: user._id
     }
-
+    console.log(dreamData)
     try {
       await createDream(dreamData)
       // navigate('/mine-dreams')
@@ -94,17 +107,26 @@ const CreateDream = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label>Image URL: </label>
+            <InputField className='inputField mediumInput' label='Image Upload'>
               <input
-                type='text'
-                name='imageUrl'
-                value={form.imageUrl}
-                onChange={handleChange}
+                type='file'
+                accept='image/*'
+                onChange={handleImageUpload}
+                disabled={waitingForImageUrl}
+              />
+              {waitingForImageUrl && <p>Uploading...</p>}
+            </InputField>
+          </div>
+          {form.imageUrl && (
+            <div>
+              <h4>Image Preview:</h4>
+              <img
+                src={form.imageUrl}
+                alt='Uploaded'
+                style={{ width: '100px', margin: '5px' }}
               />
             </div>
-          </div>
-
+          )}
           <div className='checkbox-area'>
             <div className='emotion'>
               <label>Emotions:</label>
@@ -163,7 +185,9 @@ const CreateDream = () => {
             </div>
           </div>
         </div>
-        <button type='submit'>Add Dream</button>
+        <button type='submit' disabled={waitingForImageUrl}>
+          {waitingForImageUrl ? 'Uploading...' : 'Add Dream'}
+        </button>
       </form>
     </div>
   )
