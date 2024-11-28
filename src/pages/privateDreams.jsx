@@ -90,7 +90,7 @@ const YourDreams = () => {
           />
         ))}
       </div>
-      <button onClick={applyFilters} className='filter'>
+      <button onClick={applyFilters} className='filter caption'>
         Apply Filters
       </button>
       {myDreams.map(dream => {

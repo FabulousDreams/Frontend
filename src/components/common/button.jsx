@@ -62,7 +62,7 @@ const DreamButton = ({
           )}
         </>
       ) : (
-        <span className='innerButton'>{label}</span>
+        <span className='innerButton caption'>{label}</span>
       )}
     </div>
   )

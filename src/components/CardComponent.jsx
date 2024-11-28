@@ -80,16 +80,22 @@ const Card = ({
               <EditIcon className='edit-icon' onClick={handleEdit} />
               <DeleteIcon className='delete-icon' onClick={handleDelete} />
             </div>
-            {title && <h3 className='card-title'>{editedData.title}</h3>}
+            {title && (
+              <h3 className='card-title subtitle1'>{editedData.title}</h3>
+            )}
             {emotions && emotions.length > 0 && (
-              <p className='card-emotions'>Emotions: {emotions.join(', ')}</p>
+              <p className=' bridge '>Emotions: {emotions.join(', ')}</p>
             )}
             {tags && tags.length > 0 && (
-              <p className='card-tags'>Tags: {tags.join(', ')}</p>
+              <p className=' bridge'>Tags: {tags.join(', ')}</p>
             )}
-            {subtitle && <p className='card-subtitle'>{editedData.subtitle}</p>}
+            {subtitle && (
+              <p className='card-subtitle subtitle1 '>{editedData.subtitle}</p>
+            )}
             {description && (
-              <p className='card-description'>{editedData.description}</p>
+              <p className='card-description body1 '>
+                {editedData.description}
+              </p>
             )}
           </>
         )}

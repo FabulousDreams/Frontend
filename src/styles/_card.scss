@@ -20,6 +20,7 @@ a {
   width: 90%;
   height: 250px;
   gap: 20px;
+  color: #06061e;
   @include card-gradient($color-blue-light, $color-blue-dark);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   .card-image-container {
@@ -46,7 +47,7 @@ a {
       right: 45px;
       color: $lavander-light;
       cursor: pointer;
-      font-size: 24px;
+
       transition: transform 0.2s ease;
     }
 
@@ -69,19 +70,18 @@ a {
     }
   }
   .card-title {
-    font-size: 18px;
+    // font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
   }
 
   .card-subtitle {
-    font-size: 14px;
+    // font-size: 14px;
     color: #555;
     margin-bottom: 16px;
   }
 
   .card-description {
-    font-size: 14px;
     color: #555;
     margin-bottom: 16px;
   }

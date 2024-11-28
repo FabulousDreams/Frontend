@@ -19,7 +19,7 @@
   }
 
   &.smallButton {
-    width: 60px;
+    width: 40px;
   }
 }
 .innerButton {
@@ -28,7 +28,7 @@
 .mainBtn {
   position: relative;
   display: flex;
-  padding: 6px 16px;
+  padding: 4px 12px;
   justify-content: center;
   border-radius: 8px;
   box-shadow: 0px 2px 0px 1px rgba(103, 110, 118, 0.16);
@@ -58,7 +58,8 @@
     color: #fff;
 
     font-weight: 600;
-    padding: 8px 15px;
+    padding: 4px 12px;
+
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -109,7 +110,8 @@
   border-radius: 5px;
   background: #093867;
   font-weight: 600;
-  padding: 8px 15px;
+  padding: 4px 12px;
+
   border: #396c35;
 }
 
