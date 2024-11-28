@@ -18,9 +18,12 @@ export const DreamProvider = ({ children }) => {
   const fetchTags = async () => {
     setError(null)
     try {
-      const { data } = await axios.get('http://localhost:5005/api/tags', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/tags`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setTags(data)
     } catch (err) {
       setError('Failed to fetch tags.')
@@ -30,9 +33,12 @@ export const DreamProvider = ({ children }) => {
   const fetchEmotions = async () => {
     setError(null) // Reset error state
     try {
-      const { data } = await axios.get('http://localhost:5005/api/emotions', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/emotions`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setEmotions(data) // Set the emotions
     } catch (err) {
       setError('Failed to fetch emotions.')
@@ -46,7 +52,7 @@ export const DreamProvider = ({ children }) => {
     try {
       const query = new URLSearchParams(filters).toString()
       const { data } = await axios.get(
-        `http://localhost:5005/api/dreams/mine?${query}`,
+        `${import.meta.env.VITE_API_URL}/api/dreams/mine?${query}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -69,7 +75,7 @@ export const DreamProvider = ({ children }) => {
       // Build query string from filters
       const query = new URLSearchParams(filters).toString()
       const { data } = await axios.get(
-        `http://localhost:5005/api/dreams/public?${query}`,
+        `${import.meta.env.VITE_API_URL}/api/dreams/public?${query}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -86,7 +92,7 @@ export const DreamProvider = ({ children }) => {
     setSpecificDream(null) // Reset specific dream state
     try {
       const { data } = await axios.get(
-        `http://localhost:5005/api/dreams/${dreamId}`,
+        `${import.meta.env.VITE_API_URL}/api/dreams/${dreamId}`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -110,7 +116,7 @@ export const DreamProvider = ({ children }) => {
     console.log(dreamData)
     try {
       const { data } = await axios.post(
-        'http://localhost:5005/api/dreams',
+        `${import.meta.env.VITE_API_URL}/api/dreams`,
         dreamData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -130,7 +136,7 @@ export const DreamProvider = ({ children }) => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5005/api/dreams/${dreamId}`,
+        `${import.meta.env.VITE_API_URL}/api/dreams/${dreamId}`,
         updatedData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -151,9 +157,12 @@ export const DreamProvider = ({ children }) => {
     setError(null)
 
     try {
-      await axios.delete(`http://localhost:5005/api/dreams/${dreamId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/dreams/${dreamId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setMyDreams(prevDreams =>
         prevDreams.filter(dream => dream._id !== dreamId)
       )

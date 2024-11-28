@@ -23,7 +23,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async form => {
     try {
-      const res = await axios.post('http://localhost:5005/auth/login', form)
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        form
+      )
       const authToken = res.data.authToken
       const userData = res.data.user
 
@@ -42,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   const signUp = async userData => {
     try {
       const res = await axios.post(
-        'http://localhost:5005/auth/signup',
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
         userData
       )
 

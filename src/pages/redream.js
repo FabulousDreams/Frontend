@@ -59,35 +59,35 @@ const YourDreams = () => {
   return (
     <div>
       <h1>Your Dreams</h1>
-      <div>
+      <div className='tag-filter'>
         <h2>Filter by Tags:</h2>
         {tags.map(tag => (
-          <button
+          <DreamButton
             key={tag._id}
+            label={tag.name}
+            enable={true}
+            size='small'
+            className={`primary-btn ${
+              selectedTags.includes(tag._id) ? 'blue' : 'gray'
+            }`}
             onClick={() => toggleTag(tag._id)}
-            style={{
-              backgroundColor: selectedTags.includes(tag._id) ? 'blue' : 'gray'
-            }}
-          >
-            {tag.name}
-          </button>
+          />
         ))}
       </div>
 
-      <div>
+      <div className='emotion-filter'>
         <h2>Filter by Emotions</h2>
         {emotions.map(emotion => (
-          <button
+          <DreamButton
             key={emotion._id}
+            label={emotion.name}
+            enable={true}
+            size='small'
+            className={`primary-btn ${
+              selectedEmotions.includes(emotion._id) ? 'blue' : 'gray'
+            }`}
             onClick={() => toggleEmotion(emotion._id)}
-            style={{
-              backgroundColor: selectedEmotions.includes(emotion._id)
-                ? 'blue'
-                : 'gray'
-            }}
-          >
-            {emotion.name}
-          </button>
+          />
         ))}
       </div>
       <button onClick={applyFilters}>Apply Filters</button>

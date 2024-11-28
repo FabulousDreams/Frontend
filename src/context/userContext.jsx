@@ -19,9 +19,12 @@ export const UserProvider = ({ children }) => {
   const fetchUserProfile = async () => {
     setError(null)
     try {
-      const { data } = await axios.get('http://localhost:5005/api/profile', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/profile`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       setUser(data)
     } catch (err) {
       setError('Oh no, failed to fetch your data!')
@@ -34,7 +37,7 @@ export const UserProvider = ({ children }) => {
     setLoading(true)
     try {
       const response = await axios.put(
-        'http://localhost:5005/api/profile',
+        `${import.meta.env.VITE_API_URL}/api/profile`,
         updatedData,
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -53,7 +56,7 @@ export const UserProvider = ({ children }) => {
     setLoading(true)
     try {
       const response = await axios.get(
-        'http://localhost:5005/api/admin/users',
+        `${import.meta.env.VITE_API_URL}/api/admin/users`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -71,9 +74,12 @@ export const UserProvider = ({ children }) => {
   const deleteUser = async userId => {
     setLoading(true)
     try {
-      await axios.delete(`http://localhost:5005/api/admin/users/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/admin/users/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
       return true
     } catch (err) {
       setError(err.response?.data?.message || 'Error deleting user')

@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import SaveIcon from '@mui/icons-material/Save'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useDreamContext } from '../context/dreamContext'
+import imagBasic from '../assets/images/basic.png'
 const Card = ({
   id,
   title,
@@ -43,11 +44,13 @@ const Card = ({
 
   return (
     <div className='card'>
-      {imageUrl && (
-        <div className='card-image-container'>
-          <img src={imageUrl} alt='Dream Image' className='card-image' />
-        </div>
-      )}
+      <div className='card-image-container'>
+        <img
+          src={imageUrl ? imageUrl : imagBasic}
+          alt='Dream Image'
+          className='card-image'
+        />
+      </div>
 
       <div className='card-content'>
         {isEditing ? (
