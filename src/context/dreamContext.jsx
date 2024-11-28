@@ -91,7 +91,6 @@ export const DreamProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${token}` }
         }
       )
-      console.log('Fetched Dreams:', data)
 
       setMyDreams(data)
     } catch (error) {

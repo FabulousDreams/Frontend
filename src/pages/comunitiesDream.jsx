@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom'
+import DreamButton from '../components/common/button'
 import Card from '../components/CardComponent'
 import { useDreamContext } from '../context/dreamContext'
 const PublicDreams = () => {
@@ -58,37 +59,41 @@ const PublicDreams = () => {
   return (
     <div>
       <h1>public Dreams</h1>
-      <div>
-        <h2>Filter by Tags:</h2>
+
+      <h2>Filter by Tags:</h2>
+      <div className='tag-filter'>
         {tags.map(tag => (
-          <button
+          <DreamButton
             key={tag._id}
+            label={tag.name}
+            enable={true}
+            size='small'
+            className={` ${
+              selectedTags.includes(tag._id) ? 'ok-green-btn' : 'primary-btn'
+            }`}
             onClick={() => toggleTag(tag._id)}
-            style={{
-              backgroundColor: selectedTags.includes(tag._id) ? 'blue' : 'gray'
-            }}
-          >
-            {tag.name}
-          </button>
+          />
         ))}
       </div>
 
-      <div>
-        <h2>Filter by Emotions</h2>
+      <h2>Filter by Emotions</h2>
+      <div className='emotion-filter '>
         {emotions.map(emotion => (
-          <button
+          <DreamButton
             key={emotion._id}
+            label={emotion.name}
+            enable={true}
+            size='small'
+            className={` ${
+              selectedEmotions.includes(emotion._id)
+                ? 'ok-green-btn'
+                : 'primary-btn'
+            }`}
             onClick={() => toggleEmotion(emotion._id)}
-            style={{
-              backgroundColor: selectedEmotions.includes(emotion._id)
-                ? 'blue'
-                : 'gray'
-            }}
-          >
-            {emotion.name}
-          </button>
+          />
         ))}
       </div>
+
       <button onClick={applyFilters}>Apply Filters</button>
       {publicDreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])

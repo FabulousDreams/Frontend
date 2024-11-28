@@ -8,7 +8,6 @@ const YourDreams = () => {
 
   const [selectedTags, setSelectedTags] = useState([])
   const [selectedEmotions, setSelectedEmotions] = useState([])
-
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +15,6 @@ const YourDreams = () => {
       setLoading(false)
     }
     fetchData()
-    console.log('My Dreams:', myDreams)
   }, [])
   const getEmotionNames = emotionIds => {
     return emotionIds.map(id => {
@@ -85,8 +83,8 @@ const YourDreams = () => {
             size='small'
             className={` ${
               selectedEmotions.includes(emotion._id)
-                ? 'primary-btn'
-                : 'ok-green-btn'
+                ? 'ok-green-btn'
+                : 'primary-btn'
             }`}
             onClick={() => toggleEmotion(emotion._id)}
           />
