@@ -8,9 +8,9 @@ import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import Login from './login'
 
-import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg';
+import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg'
 
-const SignUp = () => {
+const SignUpPage = () => {
   const { signUp } = useAuthContext()
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
@@ -135,4 +135,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUpPage

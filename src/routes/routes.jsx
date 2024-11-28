@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from '../pages/login'
-import SignUp from '../pages/signup'
+import SignUpPage from '../pages/signup'
 import ProtectedRoute from './protectRoutes'
 import CreateD from '../pages/createDream'
 import YourDreams from '../pages/privateDreams'
@@ -19,7 +19,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path='/signup' element={<SignUpPage />} />
 
         <Route
           path='/profile'

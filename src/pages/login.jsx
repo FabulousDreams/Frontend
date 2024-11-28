@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useAuthContext } from '../context/authContext'
 import { useNavigate } from 'react-router-dom'
-import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg';
-import SignUp from './signup'
+import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg'
+import SignUpPage from './signup'
 import InputField from '../components/common/inputField'
 import DreamButton from '../components/common/button'
 import passwordIcon from '../assets/images/password.svg'
@@ -93,7 +93,7 @@ const Login = () => {
           </div>
         </div>
       ) : (
-        <SignUp />
+        <SignUpPage />
       )}
     </>
   )
