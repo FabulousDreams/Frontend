@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
 import { Avatar } from '@mui/material'
-
+import logo from '../assets/images/Logo.png'
 const NavbarData = [
   {
     title: 'Login',
@@ -33,7 +33,7 @@ function Navbar () {
       <div className='navbar-logo'>
         <Link to='/'>
           {' '}
-          <img src='src\assets\images\Logo.png' alt='DreamCatcher Logo' />
+          <img src={logo} alt='DreamCatcher Logo' />
         </Link>
       </div>
 

@@ -4,19 +4,10 @@ import AddnewComment from '../components/createComment'
 import CommentList from '../components/commentList'
 import { useDreamContext } from '../context/dreamContext'
 import Card from '../components/CardComponent'
-import {
-  TextField,
-  Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Autocomplete,
-  Alert
-} from '@mui/material'
+import { TextField } from '@mui/material'
 const DreamDetails = () => {
   const { dreamId } = useParams()
   const {
-    myDreams,
     updateDream,
     deleteDream,
     tags,
@@ -106,7 +97,7 @@ const DreamDetails = () => {
               tags={tagNames}
               imageUrl={specificDream.imageUrl}
               onEditItem={(id, updatedData) => updateDream(id, updatedData)}
-              onDeleteItem={handleDelete}
+              onDeleteItem={() => handleDelete(specificDream._id)}
               editMood={true}
             />
           )}

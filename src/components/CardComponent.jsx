@@ -6,15 +6,7 @@ import SaveIcon from '@mui/icons-material/Save'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useDreamContext } from '../context/dreamContext'
 import imagBasic from '../assets/images/basic.png'
-import {
-  TextField,
-  Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Autocomplete,
-  Alert
-} from '@mui/material'
+import { TextField } from '@mui/material'
 const Card = ({
   id,
   title,
@@ -105,7 +97,10 @@ const Card = ({
                 <EditIcon className='edit-icon' onClick={handleEdit} />
               )}
               {editMood && (
-                <DeleteIcon className='delete-icon' onClick={handleDelete} />
+                <DeleteIcon
+                  className='delete-icon'
+                  onClick={() => handleDelete(id)}
+                />
               )}
             </div>
             {title && (

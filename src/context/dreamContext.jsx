@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useAuthContext } from './authContext'
-
+import { useNavigate } from 'react-router-dom'
 const DreamContext = createContext()
 
 export const useDreamContext = () => useContext(DreamContext)
@@ -14,7 +14,7 @@ export const DreamProvider = ({ children }) => {
   const [publicDreams, setPublicDreams] = useState([])
   const [specificDream, setSpecificDream] = useState(null)
   const [error, setError] = useState(null) // Handle errors
-
+  const navigate = useNavigate()
   const uploadImage = async file => {
     if (!file) {
       throw new Error('No file selected.')
@@ -79,7 +79,7 @@ export const DreamProvider = ({ children }) => {
       console.error('Error fetching emotions:', err)
     }
   }
-  // fetch user dreams
+
   const fetchMyDreams = async (filters = {}) => {
     setError(null) // Reset error state
 
@@ -98,8 +98,6 @@ export const DreamProvider = ({ children }) => {
       console.error('Error fetching dreams:', error)
     }
   }
-
-  // fetch public dreams
 
   const fetchPublicDreams = async (filters = {}) => {
     setError(null) // Reset error state
@@ -142,7 +140,6 @@ export const DreamProvider = ({ children }) => {
       console.error('Error fetching dream:', err)
     }
   }
-  // create new dream
 
   const createDream = async dreamData => {
     setError(null)
@@ -161,8 +158,6 @@ export const DreamProvider = ({ children }) => {
       console.error('Error creating dream:', err)
     }
   }
-
-  // update existing dream
 
   const updateDream = async (dreamId, updatedData) => {
     setError(null)
@@ -184,10 +179,9 @@ export const DreamProvider = ({ children }) => {
     }
   }
 
-  // delete a dream
-
   const deleteDream = async dreamId => {
     setError(null)
+    console.log('Dream ID:', dreamId)
 
     try {
       await axios.delete(
@@ -199,6 +193,9 @@ export const DreamProvider = ({ children }) => {
       setMyDreams(prevDreams =>
         prevDreams.filter(dream => dream._id !== dreamId)
       )
+
+      // Navigate to "My Dreams" page after successful deletion
+      navigate('/mine-dreams')
     } catch (err) {
       setError('Oh no, failed to delete dream.')
       console.error('Error deleting dream:', err)

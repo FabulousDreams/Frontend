@@ -58,7 +58,7 @@ const PublicDreams = () => {
 
   return (
     <div>
-      <h3>public Dreams</h3>
+      <h3>Public Dreams</h3>
 
       <div className='subtitle1'>Filter by Tags:</div>
       <div className='tag-filter'>
