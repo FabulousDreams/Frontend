@@ -11,13 +11,13 @@ import Login from './login'
 import Over_the_Rhone from '../assets/images/Over_the_Rhone.jpg'
 
 const SignUpPage = () => {
-  const { signUp } = useAuthContext()
+  const { signUp, feedBackSignUp } = useAuthContext()
   const [userName, setUserName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(null)
+  const [success, setSuccess] = useState()
   const [login, setLogin] = useState(true)
   const redirectLogin = () => {
     setLogin(false)
@@ -52,7 +52,8 @@ const SignUpPage = () => {
 
     try {
       await signUp(userData)
-      setSuccess('Account created successfully!')
+      setError(feedBackSignUp)
+      // setSuccess('Account created successfully!')
     } catch (err) {
       setError(err.message || 'Failed to create account.')
     }

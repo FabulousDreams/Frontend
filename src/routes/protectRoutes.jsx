@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
   }
   return token ? (
     <div className={`main-content ${token ? '' : 'no-sidebar'}`}>
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />{' '}
+      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div
         style={{
           marginLeft: isSidebarOpen ? '275px' : '70px',

@@ -34,12 +34,6 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           }`}
         >
           <li className='menu-item'>
-            <Link to='/dashboard'>
-              <NightsStayIcon />
-              {isSidebarOpen && <span>Dashboard</span>}
-            </Link>
-          </li>
-          <li className='menu-item'>
             <Link to='/mine-dreams'>
               <AutoAwesomeIcon />
               {isSidebarOpen && <span>My Dreams</span>}

@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('authToken') || null)
   const [feedBackLogin, setFeedBackLogin] = useState('')
+  const [feedBackSignUp, setFeedBackSignUp] = useState('')
 
   const navigate = useNavigate()
   useEffect(() => {
@@ -38,7 +39,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(userData))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
-      console.log('authToken', authToken)
     } catch (error) {
       console.error('Login failed:', error)
       console.log(error)
@@ -55,27 +55,33 @@ export const AuthProvider = ({ children }) => {
       const authToken = res.data.authToken
       const userDataResponse = res.data.user
 
+      // Save token and user data
       setToken(authToken)
       setUser(userDataResponse)
 
+      // Save to localStorage
       localStorage.setItem('authToken', authToken)
       localStorage.setItem('user', JSON.stringify(userDataResponse))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
+
       setTimeout(() => {
-        navigate('/dashboard')
-      }, 500)
+        navigate('/mine-dreams')
+      }, 100)
+
       return {
         success: true,
         message: 'Sign-up successful! You can now log in.'
       }
     } catch (error) {
       console.error('Sign-up failed:', error)
-      if (error.response && error.response.data.message) {
-        return { success: false, message: error.response.data.message }
-      } else {
-        return { success: false, message: 'An unexpected error occurred.' }
-      }
+
+      const errorMessage =
+        error.response?.data?.message || 'An unexpected error occurred.'
+
+      setFeedBackSignUp(errorMessage)
+
+      return { success: false, message: errorMessage }
     }
   }
 
@@ -89,7 +95,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, login, logout, feedBackLogin, signUp }}
+      value={{
+        user,
+        token,
+        login,
+        logout,
+        feedBackLogin,
+        signUp,
+        feedBackSignUp
+      }}
     >
       {children}
     </AuthContext.Provider>
