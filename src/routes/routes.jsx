@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Login from '../pages/login'
-import SignUpPage from '../pages/signup'
+import SignUpPage from '../pages/signUpPage'
 import ProtectedRoute from './protectRoutes'
 import CreateD from '../pages/createDream'
 import YourDreams from '../pages/privateDreams'
