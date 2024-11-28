@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userData)
 
       navigate('/mine-dreams')
+      localStorage.setItem('authToken', authToken)
       localStorage.setItem('user', JSON.stringify(userData))
 
       axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`
@@ -58,8 +59,8 @@ export const AuthProvider = ({ children }) => {
       // Save token and user data
       setToken(authToken)
       setUser(userDataResponse)
+      console.log(authToken)
 
-      // Save to localStorage
       localStorage.setItem('authToken', authToken)
       localStorage.setItem('user', JSON.stringify(userDataResponse))
 

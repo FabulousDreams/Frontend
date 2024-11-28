@@ -34,5 +34,18 @@
   }
 }
 .tag-filter {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
+}
+.emotion-filter {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 10px auto;
 }

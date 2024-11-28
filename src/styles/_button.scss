@@ -19,7 +19,7 @@
   }
 
   &.smallButton {
-    width: 140px;
+    width: 60px;
   }
 }
 .innerButton {
@@ -27,7 +27,6 @@
 }
 .mainBtn {
   position: relative;
-
   display: flex;
   padding: 6px 16px;
   justify-content: center;
@@ -37,7 +36,6 @@
   max-height: 32px;
   display: flex;
   justify-content: center;
-  color: #1c6030d6;
 
   img {
     margin-left: auto;
@@ -59,14 +57,14 @@
     background-color: #7497db;
     color: #fff;
 
-    padding: 8px 12px;
+    font-weight: 600;
+    padding: 8px 15px;
     border-radius: 5px;
-    font-weight: bold;
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background-color: #006a75;
+      background-color: #87a3dae7;
     }
   }
 }
@@ -106,12 +104,12 @@
 
 .ok-green-btn {
   display: flex;
-  height: 40px;
-  padding: 5px 8px;
+  color: #fff;
   align-items: center;
-  gap: 10px;
-  background: #007b83;
-
+  border-radius: 5px;
+  background: #093867;
+  font-weight: 600;
+  padding: 8px 15px;
   border: #396c35;
 }
 

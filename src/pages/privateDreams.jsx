@@ -67,24 +67,26 @@ const YourDreams = () => {
             label={tag.name}
             enable={true}
             size='small'
-            className={`primary-btn ${
-              selectedTags.includes(tag._id) ? 'blue' : 'gray'
+            className={` ${
+              selectedTags.includes(tag._id) ? 'ok-green-btn' : 'primary-btn'
             }`}
             onClick={() => toggleTag(tag._id)}
           />
         ))}
       </div>
-
-      <div className='tag-filter '>
-        <h2>Filter by Emotions</h2>
+      <br />
+      <h2>Filter by Emotions</h2>
+      <div className='emotion-filter '>
         {emotions.map(emotion => (
           <DreamButton
             key={emotion._id}
             label={emotion.name}
             enable={true}
             size='small'
-            className={`primary-btn ${
-              selectedEmotions.includes(emotion._id) ? 'blue' : 'gray'
+            className={` ${
+              selectedEmotions.includes(emotion._id)
+                ? 'primary-btn'
+                : 'ok-green-btn'
             }`}
             onClick={() => toggleEmotion(emotion._id)}
           />
