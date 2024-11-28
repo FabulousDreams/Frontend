@@ -37,7 +37,7 @@ const AddnewComment = ({ dreamId, onCommentAdded }) => {
       <DreamButton
         label='Add Comment'
         enable={true}
-        size='small'
+        size='medium'
         className={'primary-btn comment-position'}
         onClick={handleSubmit}
       />

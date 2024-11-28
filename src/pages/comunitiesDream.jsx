@@ -101,15 +101,17 @@ const PublicDreams = () => {
 
         return (
           <div key={dream._id}>
-            <Card
-              id={dream._id}
-              title={dream.title}
-              subtitle={dream.subtitle}
-              description={dream.description}
-              emotions={emotionNames}
-              tags={tagNames}
-              imageUrl={dream.imageUrl}
-            />
+            <Link to={`/dream/${dream._id}`}>
+              <Card
+                id={dream._id}
+                title={dream.title}
+                subtitle={dream.subtitle}
+                description={dream.description}
+                emotions={emotionNames}
+                tags={tagNames}
+                imageUrl={dream.imageUrl}
+              />
+            </Link>
           </div>
         )
       })}
