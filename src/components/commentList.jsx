@@ -45,7 +45,12 @@ const CommentList = ({ dreamId, newComment }) => {
       {comments.map(comment => (
         <div id='comment' key={comment._id}>
           <p>{comment.text}</p>
-          <button onClick={() => handleDelete(comment._id)}>Delete</button>
+          <button
+            onClick={() => handleDelete(comment._id)}
+            className='comment-button'
+          >
+            Delete
+          </button>
         </div>
       ))}
     </>
