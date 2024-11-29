@@ -3,6 +3,8 @@ import { useDreamContext } from '../context/dreamContext'
 import Card from '../components/CardComponent'
 import { Link } from 'react-router-dom'
 import DreamButton from '../components/common/button'
+import nodream from '../assets/images/nodreams.png'
+// import { Card, CardContent } from '@mui/material'
 const YourDreams = () => {
   const { myDreams, tags, emotions, fetchMyDreams } = useDreamContext()
 
@@ -58,7 +60,12 @@ const YourDreams = () => {
     <div>
       <h3>Your Dreams</h3>
       {myDreams.length === 0 ? (
-        <div>You have not any dream yet</div>
+        // <div>You have not any dream yet</div>
+        <Card
+          subtitle={"You don't have any dreams yet, start adding one!"}
+          editMood={false}
+          imageUrl={nodream}
+        />
       ) : (
         <>
           <div className='subtitle1'>Filter by Tags:</div>

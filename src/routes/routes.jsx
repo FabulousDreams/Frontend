@@ -10,7 +10,7 @@ import PublicDreams from '../pages/comunitiesDream'
 import LandingPage from '../pages/landingPage'
 import MyProfile from '../pages/userProfile/userProfile'
 import DreamDetails from '../pages/dreamDetails'
-
+import NotFound from '../pages/not-found'
 import Analysis from '../pages/analysis'
 
 const AppRoutes = () => {
@@ -20,6 +20,7 @@ const AppRoutes = () => {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/*' element={<NotFound />} />
 
         <Route
           path='/profile'

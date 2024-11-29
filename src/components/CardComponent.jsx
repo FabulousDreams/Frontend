@@ -104,7 +104,7 @@ const Card = ({
               )}
             </div>
             {title && (
-              <h3 className='card-title subtitle1'>{editedData.title}</h3>
+              <h3 className=' subtitle1 card-title'>{editedData.title}</h3>
             )}
             {emotions && emotions.length > 0 && (
               <p className=' bridge '>Emotions: {emotions.join(', ')}</p>
