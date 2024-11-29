@@ -1,6 +1,6 @@
 # DreamCatcher Frontend
 
-This is the frontend service for the **DreamCatcher** platform, built with Vite and React. It provides a responsive and interactive user interface for managing dreams, exploring others' dreams, analyzing data, and interacting with the community. The backend repository can be found [here](https://github.com/FabulousDreams/Backend) (replace `#` with the actual link).
+This is the frontend service for the **DreamCatcher** platform, built with Vite and React. It provides a responsive and interactive user interface for managing dreams, exploring others' dreams, analyzing data, and interacting with the community. The backend repository can be found [here](https://github.com/FabulousDreams/Backend) .
 
 ## Table of Contents
 
@@ -86,6 +86,6 @@ VITE_CLOUDINARY_NAME=<Cloudinary Upload URL>
 VITE_UNSIGNED_UPLOAD_PRESET=<Your Cloudinary Upload Preset>
 ```
 
-## License
+## Demo
 
-This project is licensed under the MIT License.
+backend repository can be found [here](https://dreamscatcher.netlify.app/)
