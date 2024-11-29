@@ -57,42 +57,50 @@ const YourDreams = () => {
   return (
     <div>
       <h3>Your Dreams</h3>
-      <div className='subtitle1'>Filter by Tags:</div>
-      <div className='tag-filter'>
-        {tags.map(tag => (
-          <DreamButton
-            key={tag._id}
-            label={tag.name}
-            enable={true}
-            size='small'
-            className={` ${
-              selectedTags.includes(tag._id) ? 'ok-green-btn' : 'primary-btn'
-            }`}
-            onClick={() => toggleTag(tag._id)}
-          />
-        ))}
-      </div>
-      <br />
-      <div className='subtitle1'>Filter by Emotions</div>
-      <div className='emotion-filter '>
-        {emotions.map(emotion => (
-          <DreamButton
-            key={emotion._id}
-            label={emotion.name}
-            enable={true}
-            size='small'
-            className={` ${
-              selectedEmotions.includes(emotion._id)
-                ? 'ok-green-btn'
-                : 'primary-btn'
-            }`}
-            onClick={() => toggleEmotion(emotion._id)}
-          />
-        ))}
-      </div>
-      <button onClick={applyFilters} className='filter caption'>
-        Apply Filters
-      </button>
+      {myDreams.length === 0 ? (
+        <div>You have not any dream yet</div>
+      ) : (
+        <>
+          <div className='subtitle1'>Filter by Tags:</div>
+          <div className='tag-filter'>
+            {tags.map(tag => (
+              <DreamButton
+                key={tag._id}
+                label={tag.name}
+                enable={true}
+                size='small'
+                className={` ${
+                  selectedTags.includes(tag._id)
+                    ? 'ok-green-btn'
+                    : 'primary-btn'
+                }`}
+                onClick={() => toggleTag(tag._id)}
+              />
+            ))}
+          </div>
+          <br />
+          <div className='subtitle1'>Filter by Emotions</div>
+          <div className='emotion-filter '>
+            {emotions.map(emotion => (
+              <DreamButton
+                key={emotion._id}
+                label={emotion.name}
+                enable={true}
+                size='small'
+                className={` ${
+                  selectedEmotions.includes(emotion._id)
+                    ? 'ok-green-btn'
+                    : 'primary-btn'
+                }`}
+                onClick={() => toggleEmotion(emotion._id)}
+              />
+            ))}
+          </div>
+          <button onClick={applyFilters} className='filter caption'>
+            Apply Filters
+          </button>
+        </>
+      )}
       {myDreams.map(dream => {
         const emotionNames = getEmotionNames(dream.emotions || [])
         const tagNames = getTagNames(dream.tags || [])
