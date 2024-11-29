@@ -112,6 +112,7 @@ const PublicDreams = () => {
                 emotions={emotionNames}
                 tags={tagNames}
                 imageUrl={dream.imageUrl}
+                editMood={false}
               />
             </Link>
           </div>

@@ -43,7 +43,7 @@ const Card = ({
     const { name, value } = e.target
     setEditedData(prev => ({ ...prev, [name]: value }))
   }
-
+  console.log(editMood)
   return (
     <div className='card'>
       <div className='card-image-container'>
